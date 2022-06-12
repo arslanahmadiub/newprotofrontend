@@ -4,21 +4,21 @@ export const navigations = [
         path: '/dashboard',
         icon: 'dashboard',
     },
-    
+
     {
         name: 'Services',
         path: '/services',
-        icon: 'services',
+        icon: 'receipt',
     },
     {
         name: 'Parts',
         path: '/parts',
-        icon: 'parts',
+        icon: 'widgets',
     },
     {
         name: 'Customers',
         path: '/customers',
-        icon: 'customers',
+        icon: 'transfer_within_a_station',
     },
     {
         name: 'Tasks',
@@ -28,32 +28,31 @@ export const navigations = [
     {
         name: 'Mechanics',
         path: '/mechanics',
-        icon: 'mechanics',
-    },  
+        icon: 'subtitles',
+    },
     {
         name: 'Enquiries',
         path: '/enquieries',
-        icon: 'enquieries',
-    },  
+        icon: 'speaker_notes',
+    },
     {
         name: 'Invoices',
         path: '/invoices',
-        icon: 'invoices',
-    },  
+        icon: 'featured_play_list',
+    },
     {
         name: 'Notification',
         path: '/notification',
-        icon: 'notification',
-    },  
+        icon: 'notifications_active',
+    },
     {
         name: 'Setting',
         path: '/setting',
-        icon: 'setting',
-    },  
+        icon: 'brightness_low',
+    },
     {
         name: 'LogOut',
-        path: '/logout',
+        path: '/',
         icon: 'logout',
-    },  
-    
+    },
 ]
