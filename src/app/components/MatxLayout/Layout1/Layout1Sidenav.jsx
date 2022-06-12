@@ -89,7 +89,7 @@ const Layout1Sidenav = () => {
                         <Switch
                             onChange={handleSidenavToggle}
                             checked={leftSidebar.mode !== 'full'}
-                            color="secondary"
+                            style={{color:"blue"}}
                             size="small"
                         />
                     </Hidden>
