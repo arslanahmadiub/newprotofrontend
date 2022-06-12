@@ -4,133 +4,56 @@ export const navigations = [
         path: '/dashboard',
         icon: 'dashboard',
     },
+    
     {
-        label: 'PAGES',
-        type: 'label',
+        name: 'Services',
+        path: '/services',
+        icon: 'services',
     },
     {
-        name: 'Session/Auth',
-        icon: 'security',
-        children: [
-            {
-                name: 'Sign in',
-                iconText: 'SI',
-                path: '/',
-            },
-            {
-                name: 'Sign up',
-                iconText: 'SU',
-                path: '/signup',
-            },
-            {
-                name: 'Forgot Password',
-                iconText: 'FP',
-                path: '/forgot-password',
-            },
-            {
-                name: 'Error',
-                iconText: '404',
-                path: '/not-found',
-            },
-        ],
+        name: 'Parts',
+        path: '/parts',
+        icon: 'parts',
     },
     {
-        label: 'Components',
-        type: 'label',
+        name: 'Customers',
+        path: '/customers',
+        icon: 'customers',
     },
     {
-        name: 'Components',
-        icon: 'favorite',
-        badge: { value: '30+', color: 'secondary' },
-        children: [
-            {
-                name: 'Auto Complete',
-                path: '/material/autocomplete',
-                iconText: 'A',
-            },
-            {
-                name: 'Buttons',
-                path: '/material/buttons',
-                iconText: 'B',
-            },
-            {
-                name: 'Checkbox',
-                path: '/material/checkbox',
-                iconText: 'C',
-            },
-            {
-                name: 'Dialog',
-                path: '/material/dialog',
-                iconText: 'D',
-            },
-            {
-                name: 'Expansion Panel',
-                path: '/material/expansion-panel',
-                iconText: 'E',
-            },
-            {
-                name: 'Form',
-                path: '/material/form',
-                iconText: 'F',
-            },
-            {
-                name: 'Icons',
-                path: '/material/icons',
-                iconText: 'I',
-            },
-            {
-                name: 'Menu',
-                path: '/material/menu',
-                iconText: 'M',
-            },
-            {
-                name: 'Progress',
-                path: '/material/progress',
-                iconText: 'P',
-            },
-            {
-                name: 'Radio',
-                path: '/material/radio',
-                iconText: 'R',
-            },
-            {
-                name: 'Switch',
-                path: '/material/switch',
-                iconText: 'S',
-            },
-            {
-                name: 'Slider',
-                path: '/material/slider',
-                iconText: 'S',
-            },
-            {
-                name: 'Snackbar',
-                path: '/material/snackbar',
-                iconText: 'S',
-            },
-            {
-                name: 'Table',
-                path: '/material/table',
-                iconText: 'T',
-            },
-        ],
+        name: 'Tasks',
+        path: '/tasks',
+        icon: 'tasks',
     },
     {
-        name: 'Charts',
-        icon: 'trending_up',
-
-        children: [
-            {
-                name: 'Echarts',
-                path: '/charts/echarts',
-                iconText: 'E',
-            },
-        ],
-    },
+        name: 'Mechanics',
+        path: '/mechanics',
+        icon: 'mechanics',
+    },  
     {
-        name: 'Documentation',
-        icon: 'launch',
-        type: 'extLink',
-        path: 'http://demos.ui-lib.com/matx-react-doc/',
-    },
+        name: 'Enquiries',
+        path: '/enquieries',
+        icon: 'enquieries',
+    },  
+    {
+        name: 'Invoices',
+        path: '/invoices',
+        icon: 'invoices',
+    },  
+    {
+        name: 'Notification',
+        path: '/notification',
+        icon: 'notification',
+    },  
+    {
+        name: 'Setting',
+        path: '/setting',
+        icon: 'setting',
+    },  
+    {
+        name: 'LogOut',
+        path: '/logout',
+        icon: 'logout',
+    },  
+    
 ]
