@@ -50,8 +50,8 @@ const Footer = () => {
                       
                         <Span sx={{ m: "auto" }}></Span>
                         <Paragraph sx={{ m: 0 }}>
-                            Design and Developed by{' '}
-                            <a href="https://arslanahmad.com">Arslan Ahmad</a>
+                        
+                            <a href="(https://inofist.com)">Copyright © 2022 Treasure Island Designed by Inofist | All rights reserved</a>
                         </Paragraph>
                     </FooterContent>
                 </AppFooter>

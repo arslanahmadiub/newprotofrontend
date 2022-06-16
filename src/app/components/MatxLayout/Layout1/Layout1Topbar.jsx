@@ -123,7 +123,7 @@ const Layout1Topbar = () => {
                         <Icon>menu</Icon>
                     </StyledIconButton>
 
-                    <IconBox>
+                    {/* <IconBox>
                         <StyledIconButton>
                             <Icon>mail_outline</Icon>
                         </StyledIconButton>
@@ -135,22 +135,68 @@ const Layout1Topbar = () => {
                         <StyledIconButton>
                             <Icon>star_outline</Icon>
                         </StyledIconButton>
-                    </IconBox>
-                </Box>
-                <Box display="flex" alignItems="center">
-                    <MatxSearchBox />
-                    <NotificationProvider>
-                        <NotificationBar />
-                    </NotificationProvider>
+                    </IconBox> */}
+    
 
-                    <ShoppingCart />
+    <Box display="flex" alignItems="center">
+                    {/* <MatxSearchBox /> */}
+                    {/* <NotificationProvider>
+                        <NotificationBar />
+                    </NotificationProvider> */}
+
+                    {/* <ShoppingCart /> */}
 
                     <MatxMenu
                         menuButton={
                             <UserMenu>
                                 <Hidden xsDown>
                                     <Span>
-                                        Hi <strong>{user.name}</strong>
+                                        Shops Dropdown
+                                    </Span>
+                                </Hidden>
+                                {/* <Avatar
+                                    // src={user.avatar}
+                                    sx={{ cursor: 'pointer' }}
+                                /> */}
+                            </UserMenu>
+                        }
+                    >
+                        <StyledItem>
+                            <Link to="/">
+                                
+                                <Span>Shop1</Span>
+                            </Link>
+                        </StyledItem>
+                        <StyledItem>
+                            
+                                
+                                <Span> Shop2 </Span>
+                            
+                        </StyledItem>
+                        <StyledItem>
+                            
+                            <Span> shop3</Span>
+                        </StyledItem>
+                        <StyledItem onClick={logout}>
+                            <Span> shop4 </Span>
+                        </StyledItem>
+                    </MatxMenu>
+                </Box>
+                </Box>
+                <Box display="flex" alignItems="center">
+                    {/* <MatxSearchBox /> */}
+                    <NotificationProvider>
+                        <NotificationBar />
+                    </NotificationProvider>
+
+                    {/* <ShoppingCart /> */}
+
+                    <MatxMenu
+                        menuButton={
+                            <UserMenu>
+                                <Hidden xsDown>
+                                    <Span>
+                                        Hi Admin
                                     </Span>
                                 </Hidden>
                                 <Avatar
