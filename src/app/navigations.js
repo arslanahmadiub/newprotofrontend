@@ -10,11 +10,25 @@ export const navigations = [
         path: '/services',
         icon: 'receipt',
     },
+
     {
         name: 'Parts',
-        path: '/parts',
         icon: 'widgets',
+        children: [
+            {
+                name: 'Add parts',
+                path: '/parts/add',
+                iconText: 'A',
+            },
+
+            {
+                name: 'View Parts',
+                path: '/parts/view',
+                iconText: 'E',
+            },
+        ],
     },
+
     {
         name: 'Customers',
         path: '/customers',

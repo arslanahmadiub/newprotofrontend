@@ -6,6 +6,7 @@ import dashboardRoutes from 'app/views/dashboard/DashboardRoutes'
 import sessionRoutes from 'app/views/sessions/SessionRoutes'
 import MatxLayout from '../components/MatxLayout/MatxLayout'
 import { Navigate } from 'react-router-dom'
+import Add from 'app/views/Parts/Add'
 
 export const AllPages = () => {
     const all_routes = [
