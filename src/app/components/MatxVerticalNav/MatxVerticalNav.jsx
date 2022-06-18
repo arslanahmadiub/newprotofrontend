@@ -144,7 +144,9 @@ const MatxVerticalNav = ({ items }) => {
                         </ButtonBase>
                     </ExternalLink>
                 )
-            } else {
+            } 
+            
+            else {
                 return (
                     <InternalLink key={index}>
                         <NavLink

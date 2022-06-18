@@ -16,7 +16,7 @@ export const navigations = [
         icon: 'widgets',
         children: [
             {
-                name: 'Add parts',
+                name: 'Add Parts',
                 path: '/parts/add',
                 iconText: 'A',
             },

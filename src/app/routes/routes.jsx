@@ -4,9 +4,16 @@ import chartsRoute from 'app/views/charts/ChartsRoute'
 import materialRoutes from 'app/views/material-kit/MaterialRoutes'
 import dashboardRoutes from 'app/views/dashboard/DashboardRoutes'
 import sessionRoutes from 'app/views/sessions/SessionRoutes'
+import customRoutes from '../CustomRoutes'
+
+
 import MatxLayout from '../components/MatxLayout/MatxLayout'
+
+
+
+
 import { Navigate } from 'react-router-dom'
-import Add from 'app/views/Parts/Add'
+
 
 export const AllPages = () => {
     const all_routes = [
@@ -16,12 +23,12 @@ export const AllPages = () => {
                     <MatxLayout />
                 </AuthGuard>
             ),
-            children: [...dashboardRoutes, ...chartsRoute, ...materialRoutes],
+            children: [...dashboardRoutes, ...chartsRoute, ...materialRoutes,...customRoutes],
         },
         ...sessionRoutes,
         {
             path: '/',
-            element: <Navigate to="dashboard/default" />,
+            element: <Navigate to="dashboard" />,
         },
         {
             path: '*',
