@@ -1,24 +1,32 @@
-import React from 'react'
-import { Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import chartsRoute from './views/charts/ChartsRoute'
 import dashboardRoutes from './views/dashboard/DashboardRoutes'
 import materialRoutes from './views/material-kit/MaterialRoutes'
+import customRoutes from './CustomRoutes'
+
+
 
 const redirectRoute = [
     {
         path: '/',
         exact: true,
-        component: () => <Redirect to="/dashboard" />,
+        component: () => <Navigate to="/dashboard" />,
     },
 ]
 
 const errorRoute = [
     {
-        component: () => <Redirect to="/not-found" />,
+        component: () => <Navigate to="/not-found" />,
     },
 ]
 
+
+
+
+
+
 const routes = [
+    ...customRoutes,
     ...dashboardRoutes,
     ...materialRoutes,
     ...chartsRoute,
