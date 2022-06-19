@@ -8,8 +8,9 @@ import {
     Icon,
     TablePagination,
 } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import { Box, styled } from '@mui/system'
+import EditPartsDialog from './EditPartsDialog'
 
 const StyledTable = styled(Table)(({ theme }) => ({
     whiteSpace: 'pre',
@@ -120,8 +121,12 @@ const subscribarList = [
 ]
 
 const ViewParts = () => {
-    const [rowsPerPage, setRowsPerPage] = React.useState(5)
-    const [page, setPage] = React.useState(0)
+    const [rowsPerPage, setRowsPerPage] = useState(5)
+
+    const [openUpdateModel, setOpenUpdateModel] = useState(false)
+    const [partsData, setPartsData] = useState(null)
+
+    const [page, setPage] = useState(0)
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage)
@@ -131,6 +136,21 @@ const ViewParts = () => {
         setRowsPerPage(+event.target.value)
         setPage(0)
     }
+
+    const handleClose = () => {
+        setOpenUpdateModel(false)
+    }
+
+    const handelEdit = (data) => {
+        setOpenUpdateModel(true)
+        setPartsData(data)
+    }
+
+    const handelChange = (e) => {
+        setPartsData({ ...partsData, [e.target.name]: e.target.value })
+    }
+
+    const handelUpdate = () => {}
 
     return (
         <Container>
@@ -153,26 +173,28 @@ const ViewParts = () => {
                                 page * rowsPerPage,
                                 page * rowsPerPage + rowsPerPage
                             )
-                            .map((subscriber, index) => (
+                            .map((item, index) => (
                                 <TableRow key={index}>
                                     <TableCell align="left">
-                                        {subscriber.category}
+                                        {item.category}
                                     </TableCell>
                                     <TableCell align="left">
-                                        {subscriber.number}
+                                        {item.number}
                                     </TableCell>
                                     <TableCell align="left">
-                                        {subscriber.brand}
+                                        {item.brand}
                                     </TableCell>
-                                    <TableCell>{subscriber.unittype}</TableCell>
-                                    <TableCell>${subscriber.price}</TableCell>
-                                    <TableCell>{subscriber.quantity}</TableCell>
+                                    <TableCell>{item.unittype}</TableCell>
+                                    <TableCell>${item.price}</TableCell>
+                                    <TableCell>{item.quantity}</TableCell>
 
                                     <TableCell>
                                         <IconButton>
                                             <Icon color="error">close</Icon>
                                         </IconButton>
-                                        <IconButton>
+                                        <IconButton
+                                            onClick={() => handelEdit(item)}
+                                        >
                                             <Icon color="correct    ">
                                                 edit
                                             </Icon>
@@ -200,6 +222,14 @@ const ViewParts = () => {
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
             </Box>
+            <EditPartsDialog
+                open={openUpdateModel}
+                handleClose={handleClose}
+                formData={partsData}
+                handelChange={handelChange}
+                handelUpdate={handelUpdate}
+                loading={true}
+            />
         </Container>
     )
 }

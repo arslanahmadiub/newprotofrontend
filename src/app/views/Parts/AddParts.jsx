@@ -121,7 +121,10 @@ const AddParts = () => {
                         md={12}
                         sm={12}
                         xs={12}
-                        style={{ display: 'flex', justifyContent: 'flex-end' }}
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'flex-end',
+                        }}
                     >
                         <Button
                             color="primary"
