@@ -51,6 +51,7 @@ const subscribarList = [
         price: 99,
         unittype: 'close',
         number: 'all.',
+        quantity: '10',
     },
     {
         category: 'shoes',
@@ -58,6 +59,7 @@ const subscribarList = [
         price: 99,
         unittype: 'close',
         number: 'all.',
+        quantity: '10',
     },
     {
         category: 'shoes',
@@ -65,6 +67,7 @@ const subscribarList = [
         price: 99,
         unittype: 'close',
         number: 'all.',
+        quantity: '10',
     },
     {
         category: 'shoes',
@@ -72,6 +75,7 @@ const subscribarList = [
         price: 99,
         unittype: 'close',
         number: 'all.',
+        quantity: '10',
     },
     {
         category: 'shoes',
@@ -79,6 +83,7 @@ const subscribarList = [
         price: 99,
         unittype: 'close',
         number: 'all.',
+        quantity: '10',
     },
     {
         category: 'shoes',
@@ -86,6 +91,7 @@ const subscribarList = [
         price: 99,
         unittype: 'close',
         number: 'all.',
+        quantity: '10',
     },
     {
         category: 'shoes',
@@ -93,6 +99,7 @@ const subscribarList = [
         price: 99,
         unittype: 'close',
         number: 'all.',
+        quantity: '10',
     },
     {
         category: 'shoes',
@@ -100,6 +107,7 @@ const subscribarList = [
         price: 99,
         unittype: 'close',
         number: 'all.',
+        quantity: '10',
     },
     {
         category: 'shoes',
@@ -107,6 +115,7 @@ const subscribarList = [
         price: 99,
         unittype: 'open',
         number: 'all.',
+        quantity: '10',
     },
 ]
 
@@ -135,6 +144,7 @@ const ViewParts = () => {
                             <TableCell>Unit Type</TableCell>
                             <TableCell>Price</TableCell>
                             <TableCell>Quantity</TableCell>
+                            <TableCell>Action</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -156,9 +166,16 @@ const ViewParts = () => {
                                     </TableCell>
                                     <TableCell>{subscriber.unittype}</TableCell>
                                     <TableCell>${subscriber.price}</TableCell>
+                                    <TableCell>{subscriber.quantity}</TableCell>
+
                                     <TableCell>
                                         <IconButton>
                                             <Icon color="error">close</Icon>
+                                        </IconButton>
+                                        <IconButton>
+                                            <Icon color="correct    ">
+                                                edit
+                                            </Icon>
                                         </IconButton>
                                     </TableCell>
                                 </TableRow>
