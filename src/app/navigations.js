@@ -4,11 +4,22 @@ export const navigations = [
         path: '/dashboard',
         icon: 'dashboard',
     },
-
     {
         name: 'Services',
-        path: '/services',
         icon: 'receipt',
+        children: [
+            {
+                name: 'Add Services',
+                path: 'services/add',
+                iconText: 'A',
+            },
+
+            {
+                name: 'View Services',
+                path: '/services/view',
+                iconText: 'E',
+            },
+        ],
     },
 
     {
