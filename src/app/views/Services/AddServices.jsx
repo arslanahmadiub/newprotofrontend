@@ -1,21 +1,15 @@
-import { Button, Grid } from '@mui/material'
-import { styled } from '@mui/system'
-import { Span } from 'app/components/Typography'
 import React, { useState } from 'react'
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator'
 
-const Container = styled('div')(({ theme }) => ({
-    margin: '30px',
-    [theme.breakpoints.down('sm')]: {
-        margin: '16px',
-    },
-    '& .breadcrumb': {
-        marginBottom: '30px',
-        [theme.breakpoints.down('sm')]: {
-            marginBottom: '16px',
-        },
-    },
-}))
+import { Button, IconButton, Card, CardContent, Grid } from '@mui/material'
+import AddIcon from '@mui/icons-material/Add'
+import InputLabel from '@mui/material/InputLabel'
+import MenuItem from '@mui/material/MenuItem'
+import FormControl from '@mui/material/FormControl'
+import Select, { SelectChangeEvent } from '@mui/material/Select'
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator'
+import { styled } from '@mui/system'
+import ImagePreview from 'app/components/ImagePreview/ImagePreview'
+import CarsModel from './CarsModel'
 
 const TextField = styled(TextValidator)(() => ({
     width: '100%',
@@ -23,123 +17,134 @@ const TextField = styled(TextValidator)(() => ({
 }))
 
 const AddServices = () => {
-    const [partsData, setPartsData] = useState({})
+    const [serviceImage, setServiceImage] = useState({
+        serviceImageFile: null,
+        serviceImageUrl: '',
+    })
+    const handleSubmit = () => {}
 
-    const handleSubmit = (event) => {
-        // console.log("submitted");
-        // console.log(event);
-    }
-
-    const handleChange = (event) => {
-        // event.persist()
-        setPartsData({
-            ...partsData,
-            [event.target.name]: event.target.value,
+    const selectImage = (e) => {
+        let imageFile = e.target.files[0]
+        let imageUrl = URL.createObjectURL(imageFile)
+        setServiceImage({
+            serviceImageFile: imageFile,
+            serviceImageUrl: imageUrl,
         })
     }
 
-    const { category, partNumber, brandName, unitType, quantity, price } =
-        partsData
+    const [carModelObj, setCarModelObj] = useState([
+        {
+            carMake: '',
+            carModel: '',
+            startYear: '',
+            endYear: '',
+        },
+    ])
 
+    const handelAddCarModel = () => {
+        let newCarModelObj = [
+            ...carModelObj,
+            {
+                carMake: '',
+                carModel: '',
+                startYear: '',
+                endYear: '',
+            },
+        ]
+        setCarModelObj(newCarModelObj)
+    }
     return (
-        <Container sx={{ mt: 3 }}>
-            <div style={{ fontSize: 35, fontWeight: 'bold' }}>Add Services</div>
-
-            <ValidatorForm onSubmit={handleSubmit} onError={() => null}>
-                <Grid container spacing={2} sx={{ mt: 1 }}>
-                    <Grid item lg={6} md={6} sm={12} xs={12}>
-                        <TextField
-                            label="Category"
-                            onChange={handleChange}
-                            type="text"
-                            name="category"
-                            value={category || ''}
-                            validators={['required']}
-                            errorMessages={['this field is required']}
-                        />
-                    </Grid>
-                    <Grid item lg={6} md={6} sm={12} xs={12}>
-                        <TextField
-                            label="Number"
-                            onChange={handleChange}
-                            type="text"
-                            name="partNumber"
-                            value={partNumber || ''}
-                            validators={['required']}
-                            errorMessages={['this field is required']}
-                        />
-                    </Grid>
-
-                    <Grid item lg={6} md={6} sm={12} xs={12}>
-                        <TextField
-                            label="Brand"
-                            onChange={handleChange}
-                            type="text"
-                            name="brandName"
-                            value={brandName || ''}
-                            validators={['required']}
-                            errorMessages={['this field is required']}
-                        />
-                    </Grid>
-                    <Grid item lg={6} md={6} sm={12} xs={12}>
-                        <TextField
-                            label="Unit Type"
-                            onChange={handleChange}
-                            type="text"
-                            name="unitType"
-                            value={unitType || ''}
-                            validators={['required']}
-                            errorMessages={['this field is required']}
-                        />
-                    </Grid>
-                    <Grid item lg={6} md={6} sm={12} xs={12}>
-                        <TextField
-                            label="Quantity"
-                            onChange={handleChange}
-                            name="quantity"
-                            type="number"
-                            value={quantity || ''}
-                            validators={['required']}
-                            errorMessages={['this field is required']}
-                        />
-                    </Grid>
-                    <Grid item lg={6} md={6} sm={12} xs={12}>
-                        <TextField
-                            label="Price"
-                            onChange={handleChange}
-                            name="price"
-                            type="number"
-                            value={price || ''}
-                            validators={['required']}
-                            errorMessages={['this field is required']}
-                        />
-                    </Grid>
-
-                    <Grid
-                        item
-                        lg={12}
-                        md={12}
-                        sm={12}
-                        xs={12}
-                        style={{
-                            display: 'flex',
-                            justifyContent: 'flex-end',
-                        }}
-                    >
-                        <Button
-                            color="primary"
-                            variant="contained"
-                            type="submit"
-                            style={{ width: '150px' }}
+        <Card>
+            <CardContent>
+                <ValidatorForm onSubmit={handleSubmit} onError={() => null}>
+                    <Grid container spacing={3} sx={{ mt: 1 }}>
+                        <Grid item lg={4} md={4} sm={12} xs={12}>
+                            <TextField
+                                label="Service Name"
+                                type="text"
+                                name="serviceName"
+                                // value={serviceName || ''}
+                            />
+                        </Grid>
+                        <Grid
+                            item
+                            lg={8}
+                            md={8}
+                            sm={12}
+                            xs={12}
+                            sx={{
+                                display: 'flex',
+                                height: '200px',
+                                justifyContent: 'space-between',
+                            }}
                         >
-                            <Span sx={{ pl: 1, textTransform: 'capitalize' }}>
+                            <ImagePreview
+                                onChange={selectImage}
+                                imageUrl={serviceImage.serviceImageUrl}
+                            />
+                        </Grid>
+                        <Grid item lg={12} md={12} sm={12} xs={12}>
+                            <h3>Cars</h3>
+                        </Grid>
+                        <Grid item lg={12} md={12} sm={12} xs={12}>
+                            {carModelObj.map((item, index) => {
+                                return (
+                                    <CarsModel
+                                        value={item}
+                                        key={index}
+                                        number={index}
+                                    />
+                                )
+                            })}
+                        </Grid>
+                        <Grid
+                            item
+                            lg={12}
+                            md={12}
+                            sm={12}
+                            xs={12}
+                            sx={{ position: 'relative' }}
+                        >
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    width: '100%',
+                                    height: '1px',
+                                    background: 'rgba(0, 0, 0, 0.23)',
+                                    position: 'relative',
+                                }}
+                            ></div>
+                            <IconButton
+                                color="primary"
+                                aria-label="upload picture"
+                                component="span"
+                                style={{
+                                    position: 'absolute',
+                                    top: '20%',
+                                    left: '50%',
+                                    background: 'white',
+                                }}
+                                onClick={handelAddCarModel}
+                            >
+                                <AddIcon />
+                            </IconButton>
+                        </Grid>
+                        <Grid
+                            item
+                            lg={12}
+                            md={12}
+                            sm={12}
+                            xs={12}
+                            sx={{ marginTop: '15px' }}
+                        >
+                            <Button variant="contained" fullWidth>
                                 Submit
-                            </Span>
-                        </Button>
+                            </Button>
+                        </Grid>
                     </Grid>
-                </Grid>
-            </ValidatorForm>
-        </Container>
+                </ValidatorForm>
+            </CardContent>
+        </Card>
     )
 }
 

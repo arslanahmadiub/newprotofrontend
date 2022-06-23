@@ -32,19 +32,6 @@ const StyledTable = styled(Table)(({ theme }) => ({
     },
 }))
 
-const Container = styled('div')(({ theme }) => ({
-    margin: '30px',
-    [theme.breakpoints.down('sm')]: {
-        margin: '16px',
-    },
-    '& .breadcrumb': {
-        marginBottom: '30px',
-        [theme.breakpoints.down('sm')]: {
-            marginBottom: '16px',
-        },
-    },
-}))
-
 const subscribarList = [
     {
         category: 'shoes',
@@ -153,7 +140,7 @@ const ViewParts = () => {
     const handelUpdate = () => {}
 
     return (
-        <Container>
+        <>
             <Box width="100%" overflow="auto">
                 <StyledTable>
                     <TableHead>
@@ -230,7 +217,7 @@ const ViewParts = () => {
                 handelUpdate={handelUpdate}
                 loading={true}
             />
-        </Container>
+        </>
     )
 }
 

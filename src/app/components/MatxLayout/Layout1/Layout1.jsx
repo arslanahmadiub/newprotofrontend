@@ -17,6 +17,19 @@ const Layout1Root = styled(Box)(({ theme }) => ({
     background: theme.palette.background.default,
 }))
 
+const Container = styled('div')(({ theme }) => ({
+    margin: '20px',
+    [theme.breakpoints.down('sm')]: {
+        margin: '16px',
+    },
+    '& .breadcrumb': {
+        marginBottom: '30px',
+        [theme.breakpoints.down('sm')]: {
+            marginBottom: '16px',
+        },
+    },
+}))
+
 const ContentBox = styled(Box)(() => ({
     height: '100%',
     display: 'flex',
@@ -113,7 +126,9 @@ const Layout1 = () => {
                         <Box flexGrow={1} position="relative">
                             <MatxSuspense>
                                 {/* {renderRoutes(routes)} */}
-                                <Outlet />
+                                <Container>
+                                    <Outlet />
+                                </Container>
                             </MatxSuspense>
                         </Box>
                         {settings.footer.show && !settings.footer.fixed && (
@@ -134,7 +149,9 @@ const Layout1 = () => {
                         <Box flexGrow={1} position="relative">
                             <MatxSuspense>
                                 {/* {renderRoutes(routes)} */}
-                                <Outlet />
+                                <Container>
+                                    <Outlet />
+                                </Container>
                             </MatxSuspense>
                         </Box>
                         {settings.footer.show && !settings.footer.fixed && (

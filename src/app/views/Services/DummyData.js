@@ -12,8 +12,8 @@ const data = [
             max: 90,
         },
         totalCost: {
-            min: 30,
-            max: 90,
+            min: 330,
+            max: 890,
         },
     },
     {

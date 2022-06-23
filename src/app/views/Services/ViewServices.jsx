@@ -4,40 +4,30 @@ import { styled } from '@mui/system'
 import { Grid } from '@mui/material'
 import data from './DummyData'
 
-const Container = styled('div')(({ theme }) => ({
-    margin: '20px',
-    [theme.breakpoints.down('sm')]: {
-        margin: '16px',
-    },
-    '& .breadcrumb': {
-        marginBottom: '30px',
-        [theme.breakpoints.down('sm')]: {
-            marginBottom: '16px',
-        },
-    },
-}))
-
 const ViewServices = () => {
     return (
-        <Container>
-            <Grid container spacing={2}>
-                {data.map((item, index) => {
-                    return (
-                        <Grid
-                            item
-                            xs={12}
-                            sm={12}
-                            md={6}
-                            lg={6}
-                            xl={6}
-                            key={index}
-                        >
-                            <ServiceCard data={item} />
-                        </Grid>
-                    )
-                })}
-            </Grid>
-        </Container>
+        <Grid container spacing={3}>
+            {data.map((item, index) => {
+                return (
+                    <Grid
+                        item
+                        xs={12}
+                        sm={6}
+                        md={3}
+                        lg={3}
+                        xl={3}
+                        key={index}
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            width: '100%',
+                        }}
+                    >
+                        <ServiceCard data={item} />
+                    </Grid>
+                )
+            })}
+        </Grid>
     )
 }
 

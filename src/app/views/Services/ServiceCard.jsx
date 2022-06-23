@@ -1,98 +1,88 @@
-import React from 'react'
-import { Card } from '@mui/material'
-import { styled } from '@mui/system'
+import * as React from 'react'
+import Card from '@mui/material/Card'
+import CardActions from '@mui/material/CardActions'
+import CardContent from '@mui/material/CardContent'
+import CardMedia from '@mui/material/CardMedia'
+import Button from '@mui/material/Button'
+import Typography from '@mui/material/Typography'
 
 const ServiceCard = (props) => {
     const { serviceImage, serviceName, laborCost, partsCost, totalCost } =
         props.data
 
-    const StyledCard = styled(Card)(({ theme }) => ({
+    const style = {
+        paddingTop: '4px',
+        paddingBottom: '4px',
         display: 'flex',
-        flexWrap: 'wrap',
-        background: theme.palette.background.paper,
-        [theme.breakpoints.down('sm')]: {
-            padding: '16px !important',
-        },
-        ':hover': {
-            cursor: 'pointer',
-        },
-    }))
-    const ContentBox = styled('div')(({ theme }) => ({
-        display: 'flex',
-        flexDirection: 'column',
-        '& small': {
-            color: theme.palette.text.secondary,
-        },
-        '& .icon': {
-            opacity: 0.6,
-            fontSize: '44px',
-            color: theme.palette.primary.main,
-        },
-    }))
-
-    const Heading = styled('h6')(({ theme }) => ({
-        margin: 0,
-        marginTop: '4px',
-        fontWeight: '500',
-        marginLeft: '20px',
-        fontSize: '24px',
-        color: theme.palette.secondary.dark,
-    }))
-    const Content = styled('h6')(({ theme }) => ({
-        margin: 0,
-        marginTop: '4px',
-        fontWeight: '500',
-        marginLeft: '20px',
-        fontSize: '17px',
-        color: 'black',
-    }))
-
-    const ContentContainer = styled('div')(({ theme }) => ({
-        display: 'flex',
-        flexDirection: 'row',
         justifyContent: 'space-between',
-        '& small': {
-            color: theme.palette.text.secondary,
-        },
-        '& .icon': {
-            opacity: 0.6,
-            fontSize: '44px',
-            color: theme.palette.primary.main,
-        },
-    }))
+    }
 
     return (
-        <StyledCard elevation={6}>
-            <img
-                src={serviceImage}
-                alt="Oil Change"
-                width="200px"
-                height="150px"
+        <Card sx={{ maxWidth: 280 }}>
+            <CardMedia
+                component="img"
+                alt="green iguana"
+                height="200"
+                image={serviceImage}
+                sx={{ width: '280px', objectFit: 'cover' }}
             />
-            <ContentBox>
-                <Heading>{serviceName}</Heading>
-                <ContentContainer>
-                    <Content>Labor Cost:</Content>
-                    <Content>
-                        {laborCost?.min} - {laborCost?.max}
-                    </Content>
-                </ContentContainer>
+            <CardContent
+                sx={{
+                    paddingBottom: '4px',
+                    paddingTop: '4px',
+                }}
+            >
+                <Typography
+                    gutterBottom
+                    variant="h6"
+                    component="div"
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        fontWeight: '400',
+                    }}
+                >
+                    {serviceName}
+                </Typography>
+            </CardContent>
+            <CardContent sx={style}>
+                <Typography variant="body1" color="text.secondary">
+                    Total Cost
+                </Typography>
+                <Typography variant="body1" color="text.secondary">
+                    {totalCost.min}$ - {totalCost.max}$
+                </Typography>
+            </CardContent>
+            <CardContent sx={style}>
+                <Typography variant="body1" color="text.secondary">
+                    Labour Cost
+                </Typography>
+                <Typography variant="body1" color="text.secondary">
+                    {laborCost.min}$ - {laborCost.max}$
+                </Typography>
+            </CardContent>
 
-                <ContentContainer>
-                    <Content>Parts Cost:</Content>
-                    <Content>
-                        {partsCost?.min} - {partsCost?.max}
-                    </Content>
-                </ContentContainer>
-                <ContentContainer>
-                    <Content>Total Cost: </Content>
+            <CardContent sx={style}>
+                <Typography variant="body1" color="text.secondary">
+                    Parts Cost
+                </Typography>
+                <Typography variant="body1" color="text.secondary">
+                    {partsCost.min}$ - {partsCost.max}$
+                </Typography>
+            </CardContent>
 
-                    <Content>
-                        {totalCost?.min} - {totalCost?.max}
-                    </Content>
-                </ContentContainer>
-            </ContentBox>
-        </StyledCard>
+            <CardActions
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    marginBottom: '8px',
+                }}
+            >
+                <Button size="small" variant="contained">
+                    See Details
+                </Button>
+            </CardActions>
+        </Card>
     )
 }
 

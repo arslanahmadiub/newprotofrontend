@@ -4,19 +4,6 @@ import { Span } from 'app/components/Typography'
 import React, { useState } from 'react'
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator'
 
-const Container = styled('div')(({ theme }) => ({
-    margin: '30px',
-    [theme.breakpoints.down('sm')]: {
-        margin: '16px',
-    },
-    '& .breadcrumb': {
-        marginBottom: '30px',
-        [theme.breakpoints.down('sm')]: {
-            marginBottom: '16px',
-        },
-    },
-}))
-
 const TextField = styled(TextValidator)(() => ({
     width: '100%',
     marginBottom: '16px',
@@ -42,7 +29,7 @@ const AddParts = () => {
         partsData
 
     return (
-        <Container sx={{ mt: 3 }}>
+        <div sx={{ mt: 3 }}>
             <div style={{ fontSize: 35, fontWeight: 'bold' }}>Add Parts</div>
 
             <ValidatorForm onSubmit={handleSubmit} onError={() => null}>
@@ -139,7 +126,7 @@ const AddParts = () => {
                     </Grid>
                 </Grid>
             </ValidatorForm>
-        </Container>
+        </div>
     )
 }
 
