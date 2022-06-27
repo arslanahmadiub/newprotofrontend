@@ -1,5 +1,6 @@
 import React, { lazy } from 'react'
 import Loadable from 'app/components/Loadable/Loadable'
+import ServicesDetails from './views/Services/ServicesDetails'
 
 const AddParts = Loadable(lazy(() => import('./views/Parts/AddParts')))
 const ViewParts = Loadable(lazy(() => import('./views/Parts/ViewParts')))
@@ -25,6 +26,10 @@ const customRoutes = [
     {
         path: '/services/view',
         element: <ViewServices />,
+    },
+    {
+        path: '/services/details/:id',
+        element: <ServicesDetails />,
     },
 ]
 

@@ -4,8 +4,6 @@ import dashboardRoutes from './views/dashboard/DashboardRoutes'
 import materialRoutes from './views/material-kit/MaterialRoutes'
 import customRoutes from './CustomRoutes'
 
-
-
 const redirectRoute = [
     {
         path: '/',
@@ -19,11 +17,6 @@ const errorRoute = [
         component: () => <Navigate to="/not-found" />,
     },
 ]
-
-
-
-
-
 
 const routes = [
     ...customRoutes,

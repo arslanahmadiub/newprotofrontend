@@ -5,6 +5,7 @@ import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
+import { useNavigate } from 'react-router-dom'
 
 const ServiceCard = (props) => {
     const { serviceImage, serviceName, laborCost, partsCost, totalCost } =
@@ -15,6 +16,12 @@ const ServiceCard = (props) => {
         paddingBottom: '4px',
         display: 'flex',
         justifyContent: 'space-between',
+    }
+
+    let navigate = useNavigate()
+
+    const handelSeeDetails = () => {
+        navigate('/services/details/1')
     }
 
     return (
@@ -78,7 +85,11 @@ const ServiceCard = (props) => {
                     marginBottom: '8px',
                 }}
             >
-                <Button size="small" variant="contained">
+                <Button
+                    size="small"
+                    variant="contained"
+                    onClick={handelSeeDetails}
+                >
                     See Details
                 </Button>
             </CardActions>
