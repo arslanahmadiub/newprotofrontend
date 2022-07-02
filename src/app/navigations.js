@@ -47,8 +47,20 @@ export const navigations = [
     },
     {
         name: 'Tasks',
-        path: '/tasks',
         icon: 'tasks',
+        children: [
+            {
+                name: 'Add Task',
+                path: '/task/add',
+                iconText: 'A',
+            },
+
+            {
+                name: 'View Task',
+                path: '/task/view',
+                iconText: 'E',
+            },
+        ],
     },
     {
         name: 'Mechanics',
