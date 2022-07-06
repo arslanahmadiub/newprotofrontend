@@ -103,18 +103,18 @@ const AddNewCars = ({
                         <Grid item xs={12} sm={12} md={6}>
                             <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">
-                                    Age
+                                    Parts
                                 </InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
                                     value={formData && formData.laboutCost}
-                                    label="Age"
+                                    label="Parts"
                                     onChange={handelChange}
                                 >
-                                    <MenuItem value={10}>Ten</MenuItem>
-                                    <MenuItem value={20}>Twenty</MenuItem>
-                                    <MenuItem value={30}>Thirty</MenuItem>
+                                    <MenuItem value={10}>Dummy Part 1</MenuItem>
+                                    <MenuItem value={20}>Dummy Part 2</MenuItem>
+                                    <MenuItem value={30}>Dummy Part 3</MenuItem>
                                 </Select>
                             </FormControl>
                         </Grid>

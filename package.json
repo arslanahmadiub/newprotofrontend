@@ -42,6 +42,7 @@
         "start": "react-app-rewired start",
         "build": "GENERATE_SOURCEMAP=false react-scripts build",
         "test": "react-scripts test",
+        "deploy": "./scripts/deploy.sh",
         "eject": "react-scripts eject"
     },
     "eslintConfig": {

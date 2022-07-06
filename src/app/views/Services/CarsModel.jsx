@@ -70,15 +70,15 @@ const CarsModel = (props) => {
             </Grid>
             <Grid item lg={12} md={12} sm={12} xs={12}>
                 <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                    <InputLabel id="demo-simple-select-label">Parts</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         label="Select"
                     >
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
+                        <MenuItem value={10}>Dummy Part 1</MenuItem>
+                        <MenuItem value={20}>Dummy Part 2</MenuItem>
+                        <MenuItem value={30}>Dummy Part 3</MenuItem>
                     </Select>
                 </FormControl>
             </Grid>
