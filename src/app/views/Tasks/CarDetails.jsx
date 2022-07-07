@@ -1,17 +1,5 @@
 import React from 'react'
-import {
-    Button,
-    IconButton,
-    Card,
-    CardContent,
-    Grid,
-    Radio,
-    RadioGroup,
-    FormControlLabel,
-    FormControl,
-    FormLabel,
-    Chip,
-} from '@mui/material'
+import { Radio, FormControlLabel, Chip } from '@mui/material'
 
 const CarDetails = ({ checked, data, onChange }) => {
     console.log('Checked', checked)

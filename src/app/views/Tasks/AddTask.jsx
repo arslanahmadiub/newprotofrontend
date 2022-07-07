@@ -17,6 +17,7 @@ import ExistingCustomer from './ExistingCustomer'
 import NewCustomer from './NewCustomer'
 import CarDetails from './CarDetails'
 import AddNewCars from '../Services/AddNewCars'
+import AddNewTaskForm from './AddNewTaskForm'
 
 const AddTask = () => {
     const titleList = ['Add New Task', 'Car Details']
@@ -135,7 +136,7 @@ const AddTask = () => {
                         )
                     })
                 ) : (
-                    <h1>Hello</h1>
+                    <AddNewTaskForm />
                 )}
                 <Grid
                     item
