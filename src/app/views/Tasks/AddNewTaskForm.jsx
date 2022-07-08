@@ -1,13 +1,5 @@
 import React, { useState } from 'react'
-import {
-    Grid,
-    TextField,
-    InputLabel,
-    FormControl,
-    Select,
-    MenuItem,
-    IconButton,
-} from '@mui/material'
+import { Grid, TextField, IconButton, Autocomplete } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 
 import TaskServices from './TaskServices'
@@ -105,8 +97,64 @@ const AddNewTaskForm = () => {
                     <AddIcon />
                 </IconButton>
             </Grid>
+
+            <Grid item lg={12} md={12} sm={12} xs={12}>
+                <Autocomplete
+                    multiple
+                    id="tags-outlined"
+                    options={extraParts}
+                    getOptionLabel={(option) => option.title}
+                    filterSelectedOptions
+                    defaultValue={[extraParts[1], extraParts[0]]}
+                    renderInput={(params) => (
+                        <TextField
+                            {...params}
+                            label="Parts"
+                            placeholder="Parts"
+                        />
+                    )}
+                    ChipProps={{ color: 'primary' }}
+                />
+            </Grid>
+
+            <Grid
+                item
+                xs={12}
+                sx={{ display: 'flex', justifyContent: 'flex-end' }}
+            >
+                <TextField label="Total Price" type="number" />
+            </Grid>
+            <Grid
+                item
+                xs={12}
+                sx={{ display: 'flex', justifyContent: 'flex-end' }}
+            >
+                <TextField label="Extra Parts Cost" type="number" />
+            </Grid>
+            <Grid
+                item
+                xs={12}
+                sx={{ display: 'flex', justifyContent: 'flex-end' }}
+            >
+                <TextField label="Tax" type="number" />
+            </Grid>
+            <Grid
+                item
+                xs={12}
+                sx={{ display: 'flex', justifyContent: 'flex-end' }}
+            >
+                <TextField label="Final Price" type="number" />
+            </Grid>
         </Grid>
     )
 }
 
 export default AddNewTaskForm
+
+const extraParts = [
+    { title: 'Extra Parts 1' },
+    { title: 'Extra Parts 2' },
+    { title: 'Extra Parts 3' },
+    { title: 'Extra Parts 4' },
+    { title: 'Extra Parts 5' },
+]

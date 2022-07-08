@@ -1,76 +1,43 @@
 import React from 'react'
-import {
-    Grid,
-    InputLabel,
-    FormControl,
-    Select,
-    MenuItem,
-    styled,
-    Paper,
-    Chip,
-    TextField,
-} from '@mui/material'
-import TagFacesIcon from '@mui/icons-material/TagFaces'
-
-const ListItem = styled('li')(({ theme }) => ({
-    margin: theme.spacing(0.5),
-}))
+import { Grid, TextField, Autocomplete } from '@mui/material'
 
 const TaskServices = () => {
-    const handleDelete = () => {}
-
     return (
         <Grid container spacing={3}>
             <Grid item lg={12} md={12} sm={12} xs={12}>
-                <FormControl fullWidth>
-                    <InputLabel id="select-service-label">
-                        Select Service
-                    </InputLabel>
-                    <Select
-                        labelId="select-service-label"
-                        label="Select Service"
-                    >
-                        <MenuItem value={10}>Dummy Service 1</MenuItem>
-                        <MenuItem value={20}>Dummy Service 2</MenuItem>
-                        <MenuItem value={30}>Dummy Service 3</MenuItem>
-                    </Select>
-                </FormControl>
+                <Autocomplete
+                    multiple
+                    id="tags-outlined"
+                    options={topService}
+                    getOptionLabel={(option) => option.title}
+                    filterSelectedOptions
+                    renderInput={(params) => (
+                        <TextField
+                            {...params}
+                            label="Select Service"
+                            placeholder="Select Service"
+                        />
+                    )}
+                    ChipProps={{ color: 'primary' }}
+                />
             </Grid>
             <Grid item lg={12} md={12} sm={12} xs={12}>
-                <Paper
-                    sx={{
-                        display: 'flex',
-                        flexWrap: 'wrap',
-                        listStyle: 'none',
-                        p: 0.5,
-                        m: 0,
-                        border: '1px solid lightGray',
-                        boxShadow: 'none',
-                    }}
-                    component="ul"
-                >
-                    <ListItem>
-                        <Chip
-                            color="primary"
-                            label="Service 1"
-                            onDelete={handleDelete}
+                <Autocomplete
+                    multiple
+                    id="tags-outlined"
+                    options={topParts}
+                    getOptionLabel={(option) => option.title}
+                    filterSelectedOptions
+                    defaultValue={[topParts[1], topParts[0]]}
+                    renderInput={(params) => (
+                        <TextField
+                            {...params}
+                            label="Parts"
+                            placeholder="Parts"
                         />
-                    </ListItem>
-                    <ListItem>
-                        <Chip
-                            color="primary"
-                            label="Service 2"
-                            onDelete={handleDelete}
-                        />
-                    </ListItem>
-                    <ListItem>
-                        <Chip
-                            color="primary"
-                            label="Service 3"
-                            onDelete={handleDelete}
-                        />
-                    </ListItem>
-                </Paper>
+                    )}
+                    ChipProps={{ color: 'primary' }}
+                />
             </Grid>
 
             <Grid item lg={3} md={3} sm={6} xs={12}>
@@ -110,3 +77,19 @@ const TaskServices = () => {
 }
 
 export default TaskServices
+
+const topService = [
+    { title: 'Service 1' },
+    { title: 'Service 2' },
+    { title: 'Service 3' },
+    { title: 'Service 4' },
+    { title: 'Service 5' },
+]
+
+const topParts = [
+    { title: 'Parts 1' },
+    { title: 'Parts 2' },
+    { title: 'Parts 3' },
+    { title: 'Parts 4' },
+    { title: 'Parts 5' },
+]
