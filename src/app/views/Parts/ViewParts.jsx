@@ -8,9 +8,16 @@ import {
     Icon,
     TablePagination,
 } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Box, styled } from '@mui/system'
 import EditPartsDialog from './EditPartsDialog'
+import DeletePartsDialog from './DeletePartsDialog'
+import {
+    getPartsApi,
+    updatePartsApi,
+    deletePartsApi,
+} from '../../../api-services/PartsApi'
+import { pick } from 'lodash'
 
 const StyledTable = styled(Table)(({ theme }) => ({
     whiteSpace: 'pre',
@@ -32,86 +39,32 @@ const StyledTable = styled(Table)(({ theme }) => ({
     },
 }))
 
-const subscribarList = [
-    {
-        category: 'shoes',
-        brand: 'Nike',
-        price: 99,
-        unittype: 'close',
-        number: 'all.',
-        quantity: '10',
-    },
-    {
-        category: 'shoes',
-        brand: 'Nike',
-        price: 99,
-        unittype: 'close',
-        number: 'all.',
-        quantity: '10',
-    },
-    {
-        category: 'shoes',
-        brand: 'Nike',
-        price: 99,
-        unittype: 'close',
-        number: 'all.',
-        quantity: '10',
-    },
-    {
-        category: 'shoes',
-        brand: 'Nike',
-        price: 99,
-        unittype: 'close',
-        number: 'all.',
-        quantity: '10',
-    },
-    {
-        category: 'shoes',
-        brand: 'Nike',
-        price: 99,
-        unittype: 'close',
-        number: 'all.',
-        quantity: '10',
-    },
-    {
-        category: 'shoes',
-        brand: 'Nike',
-        price: 99,
-        unittype: 'close',
-        number: 'all.',
-        quantity: '10',
-    },
-    {
-        category: 'shoes',
-        brand: 'Nike',
-        price: 99,
-        unittype: 'close',
-        number: 'all.',
-        quantity: '10',
-    },
-    {
-        category: 'shoes',
-        brand: 'Nike',
-        price: 99,
-        unittype: 'close',
-        number: 'all.',
-        quantity: '10',
-    },
-    {
-        category: 'shoes',
-        brand: 'Nike',
-        price: 99,
-        unittype: 'open',
-        number: 'all.',
-        quantity: '10',
-    },
-]
-
 const ViewParts = () => {
     const [rowsPerPage, setRowsPerPage] = useState(5)
 
+    const [selectedPartId, setSelectedPartId] = useState(null)
+
+    const [subscribarList, setSubscribarList] = useState([])
+
+    const [updateModelLoading, setUpdateModelLoading] = useState(false)
+    const [deleteLoading, setDeleteLoading] = useState(false)
+    const [deleteModelOpen, setDeleteModelOpen] = useState(false)
+
     const [openUpdateModel, setOpenUpdateModel] = useState(false)
     const [partsData, setPartsData] = useState(null)
+
+    const getPartsData = async () => {
+        try {
+            let { data } = await getPartsApi()
+            setSubscribarList(data.data)
+        } catch (error) {
+            console.log('Error', error)
+        }
+    }
+
+    useEffect(() => {
+        getPartsData()
+    }, [])
 
     const [page, setPage] = useState(0)
 
@@ -137,7 +90,52 @@ const ViewParts = () => {
         setPartsData({ ...partsData, [e.target.name]: e.target.value })
     }
 
-    const handelUpdate = () => {}
+    const handelUpdate = async () => {
+        setUpdateModelLoading(true)
+        try {
+            let requestedData = pick(partsData, [
+                'quantity',
+                'partNumber',
+                'price',
+            ])
+            let { data } = await updatePartsApi(requestedData, partsData._id)
+            if (data.success) {
+                getPartsData()
+            }
+            setUpdateModelLoading(false)
+
+            console.log('Data', data)
+            setOpenUpdateModel(false)
+        } catch (error) {
+            console.log('Error', error)
+            setUpdateModelLoading(false)
+        }
+    }
+
+    const handleCloseDeleteModel = () => {
+        setDeleteModelOpen(false)
+        setSelectedPartId(null)
+    }
+
+    const handelDeleteModelOpen = (data) => {
+        setSelectedPartId(data)
+        setDeleteModelOpen(true)
+    }
+    const handelDelete = async () => {
+        setDeleteLoading(true)
+        try {
+            let { data } = await deletePartsApi(selectedPartId)
+            if (data.success) {
+                setDeleteLoading(false)
+                setDeleteModelOpen(false)
+                setSelectedPartId(null)
+                getPartsData()
+            }
+        } catch (error) {
+            setDeleteLoading(false)
+            console.log('Error', error)
+        }
+    }
 
     return (
         <>
@@ -163,20 +161,24 @@ const ViewParts = () => {
                             .map((item, index) => (
                                 <TableRow key={index}>
                                     <TableCell align="left">
-                                        {item.category}
+                                        {item.partCategory}
                                     </TableCell>
                                     <TableCell align="left">
-                                        {item.number}
+                                        {item.partNumber}
                                     </TableCell>
                                     <TableCell align="left">
-                                        {item.brand}
+                                        {item.partBrand}
                                     </TableCell>
-                                    <TableCell>{item.unittype}</TableCell>
+                                    <TableCell>{item.unitType}</TableCell>
                                     <TableCell>${item.price}</TableCell>
                                     <TableCell>{item.quantity}</TableCell>
 
                                     <TableCell>
-                                        <IconButton>
+                                        <IconButton
+                                            onClick={() =>
+                                                handelDeleteModelOpen(item._id)
+                                            }
+                                        >
                                             <Icon color="error">close</Icon>
                                         </IconButton>
                                         <IconButton
@@ -209,13 +211,20 @@ const ViewParts = () => {
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
             </Box>
+
             <EditPartsDialog
                 open={openUpdateModel}
                 handleClose={handleClose}
                 formData={partsData}
                 handelChange={handelChange}
                 handelUpdate={handelUpdate}
-                loading={true}
+                loading={updateModelLoading}
+            />
+            <DeletePartsDialog
+                open={deleteModelOpen}
+                handleClose={handleCloseDeleteModel}
+                handelDelete={handelDelete}
+                loading={deleteLoading}
             />
         </>
     )

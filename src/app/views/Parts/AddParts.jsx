@@ -3,6 +3,10 @@ import { styled } from '@mui/system'
 import { Span } from 'app/components/Typography'
 import React, { useState } from 'react'
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator'
+import { addPartsApi } from '../../../api-services/PartsApi'
+
+import LoadingButton from '@mui/lab/LoadingButton'
+import SaveIcon from '@mui/icons-material/Save'
 
 const TextField = styled(TextValidator)(() => ({
     width: '100%',
@@ -10,22 +14,45 @@ const TextField = styled(TextValidator)(() => ({
 }))
 
 const AddParts = () => {
-    const [partsData, setPartsData] = useState({})
+    const [partsData, setPartsData] = useState({
+        partCategory: '',
+        partNumber: '',
+        partBrand: '',
+        unitType: '',
+        quantity: '',
+        price: '',
+    })
 
-    const handleSubmit = (event) => {
-        // console.log("submitted");
-        // console.log(event);
+    const [loading, setLoading] = useState(false)
+
+    const handleSubmit = async (event) => {
+        try {
+            setLoading(true)
+            let { data } = await addPartsApi(partsData)
+            setLoading(false)
+
+            setPartsData({
+                partCategory: '',
+                partBrand: '',
+                unitType: '',
+                quantity: '',
+                partNumber: '',
+                price: '',
+            })
+        } catch (error) {
+            console.log('Error', error)
+            setLoading(false)
+        }
     }
 
     const handleChange = (event) => {
-        // event.persist()
         setPartsData({
             ...partsData,
             [event.target.name]: event.target.value,
         })
     }
 
-    const { category, partNumber, brandName, unitType, quantity, price } =
+    const { partCategory, partNumber, partBrand, unitType, quantity, price } =
         partsData
 
     return (
@@ -39,8 +66,8 @@ const AddParts = () => {
                             label="Category"
                             onChange={handleChange}
                             type="text"
-                            name="category"
-                            value={category || ''}
+                            name="partCategory"
+                            value={partCategory || ''}
                             validators={['required']}
                             errorMessages={['this field is required']}
                         />
@@ -62,8 +89,8 @@ const AddParts = () => {
                             label="Brand"
                             onChange={handleChange}
                             type="text"
-                            name="brandName"
-                            value={brandName || ''}
+                            name="partBrand"
+                            value={partBrand || ''}
                             validators={['required']}
                             errorMessages={['this field is required']}
                         />
@@ -113,16 +140,16 @@ const AddParts = () => {
                             justifyContent: 'flex-end',
                         }}
                     >
-                        <Button
-                            color="primary"
+                        <LoadingButton
+                            loading={loading}
+                            loadingPosition="start"
+                            startIcon={<SaveIcon />}
                             variant="contained"
+                            color="primary"
                             type="submit"
-                            style={{ width: '150px' }}
                         >
-                            <Span sx={{ pl: 1, textTransform: 'capitalize' }}>
-                                Submit
-                            </Span>
-                        </Button>
+                            Save
+                        </LoadingButton>
                     </Grid>
                 </Grid>
             </ValidatorForm>

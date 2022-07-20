@@ -10,6 +10,7 @@
     border-style: dashed;
     position: relative;
     overflow: hidden;
+    flex-direction: column;
   
 }
 

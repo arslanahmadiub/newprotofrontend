@@ -26,10 +26,10 @@ const EditPartsDialog = ({
                 <DialogContent>
                     <TextField
                         label="Number"
-                        name="number"
+                        name="partNumber"
                         type="text"
                         fullWidth
-                        value={formData && formData.number}
+                        value={formData && formData.partNumber}
                         margin="dense"
                         onChange={handelChange}
                     />

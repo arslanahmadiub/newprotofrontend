@@ -1,0 +1,4 @@
+{
+    "baseurlDev":"http://localhost:5000/api/v1",
+    "baseurlProd":"http://staging-api.new-prototype.com/api/v1"
+}

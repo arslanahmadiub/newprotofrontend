@@ -10,18 +10,27 @@ const TextField = styled(TextValidator)(() => ({
     marginBottom: '16px',
 }))
 
-const CarsModel = (props) => {
+const CarsModel = ({
+    number,
+    value,
+    onChange,
+    partsList,
+    handelAutoCompletChange,
+}) => {
     return (
         <Grid container spacing={3}>
             <Grid item lg={12} md={12} sm={12} xs={12}>
-                <h3>{props.number + 1}</h3>
+                <h3>{number + 1}</h3>
             </Grid>
             <Grid item lg={3} md={3} sm={12} xs={12}>
                 <TextField
                     label="Make"
                     type="text"
                     name="carMake"
-                    // value={serviceName || ''}
+                    value={value.carMake || ''}
+                    onChange={(e) => onChange(e, number)}
+                    validators={['required']}
+                    errorMessages={['this field is required']}
                 />
             </Grid>
             <Grid item lg={3} md={3} sm={12} xs={12}>
@@ -29,7 +38,10 @@ const CarsModel = (props) => {
                     label="Model"
                     type="text"
                     name="carModel"
-                    // value={serviceName || ''}
+                    value={value.carModel || ''}
+                    onChange={(e) => onChange(e, number)}
+                    validators={['required']}
+                    errorMessages={['this field is required']}
                 />
             </Grid>
             <Grid item lg={6} md={6} sm={12} xs={12}>
@@ -38,8 +50,11 @@ const CarsModel = (props) => {
                         <TextField
                             label="Year"
                             type="text"
-                            name="carYear"
-                            // value={serviceName || ''}
+                            name="startYear"
+                            value={value.startYear || ''}
+                            onChange={(e) => onChange(e, number)}
+                            validators={['required']}
+                            errorMessages={['this field is required']}
                         />
                     </Grid>
                     <Grid
@@ -59,8 +74,11 @@ const CarsModel = (props) => {
                         <TextField
                             label="Year"
                             type="text"
-                            name="carYear"
-                            // value={serviceName || ''}
+                            name="endYear"
+                            value={value.endYear || ''}
+                            onChange={(e) => onChange(e, number)}
+                            validators={['required']}
+                            errorMessages={['this field is required']}
                         />
                     </Grid>
                 </Grid>
@@ -69,8 +87,12 @@ const CarsModel = (props) => {
                 <Autocomplete
                     multiple
                     id="tags-outlined"
-                    options={top100Films}
-                    getOptionLabel={(option) => option.title}
+                    options={partsList}
+                    value={value.parts}
+                    getOptionLabel={(option) => option.partBrand}
+                    onChange={(e, newValue) =>
+                        handelAutoCompletChange(e, newValue, number)
+                    }
                     filterSelectedOptions
                     renderInput={(params) => (
                         <TextField
@@ -86,33 +108,44 @@ const CarsModel = (props) => {
             <Grid item lg={3} md={3} sm={12} xs={12}>
                 <TextField
                     label="Parts Cost"
-                    type="text"
+                    type="number"
                     name="partsCost"
-                    // value={serviceName || ''}
+                    value={value.partsCost || ''}
+                    validators={['required']}
+                    errorMessages={['this field is required']}
                 />
             </Grid>
             <Grid item lg={3} md={3} sm={12} xs={12}>
                 <TextField
                     label="Labor Cost"
-                    type="text"
+                    type="number"
                     name="laborCost"
-                    // value={serviceName || ''}
+                    value={value.laborCost || ''}
+                    onChange={(e) => onChange(e, number)}
+                    validators={['required']}
+                    errorMessages={['this field is required']}
                 />
             </Grid>
             <Grid item lg={3} md={3} sm={12} xs={12}>
                 <TextField
                     label="Discount"
-                    type="text"
+                    type="number"
                     name="discount"
-                    // value={serviceName || ''}
+                    value={value.discount || ''}
+                    onChange={(e) => onChange(e, number)}
+                    validators={['required']}
+                    errorMessages={['this field is required']}
                 />
             </Grid>
             <Grid item lg={3} md={3} sm={12} xs={12}>
                 <TextField
-                    label="Extimate Cost"
-                    type="text"
+                    label="Estimate Cost"
+                    type="number"
                     name="estimateCost"
-                    // value={serviceName || ''}
+                    value={value.estimateCost || ''}
+                    onChange={(e) => onChange(e, number)}
+                    validators={['required']}
+                    errorMessages={['this field is required']}
                 />
             </Grid>
         </Grid>
