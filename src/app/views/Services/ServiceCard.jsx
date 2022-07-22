@@ -8,8 +8,14 @@ import Typography from '@mui/material/Typography'
 import { useNavigate } from 'react-router-dom'
 
 const ServiceCard = (props) => {
-    const { serviceImage, serviceName, laborCost, partsCost, totalCost } =
-        props.data
+    const {
+        serviceImage,
+        serviceName,
+        rangeTotal,
+        rangeLabor,
+        rangeParts,
+        _id,
+    } = props.data
 
     const style = {
         paddingTop: '4px',
@@ -21,7 +27,7 @@ const ServiceCard = (props) => {
     let navigate = useNavigate()
 
     const handelSeeDetails = () => {
-        navigate('/services/details/1')
+        navigate(`/services/details/${_id}`)
     }
 
     return (
@@ -57,7 +63,7 @@ const ServiceCard = (props) => {
                     Total Cost
                 </Typography>
                 <Typography variant="body1" color="text.secondary">
-                    {totalCost.min}$ - {totalCost.max}$
+                    {rangeTotal.min}$ - {rangeTotal.max}$
                 </Typography>
             </CardContent>
             <CardContent sx={style}>
@@ -65,7 +71,7 @@ const ServiceCard = (props) => {
                     Labour Cost
                 </Typography>
                 <Typography variant="body1" color="text.secondary">
-                    {laborCost.min}$ - {laborCost.max}$
+                    {rangeLabor.min}$ - {rangeLabor.max}$
                 </Typography>
             </CardContent>
 
@@ -74,7 +80,7 @@ const ServiceCard = (props) => {
                     Parts Cost
                 </Typography>
                 <Typography variant="body1" color="text.secondary">
-                    {partsCost.min}$ - {partsCost.max}$
+                    {rangeParts.min}$ - {rangeParts.max}$
                 </Typography>
             </CardContent>
 

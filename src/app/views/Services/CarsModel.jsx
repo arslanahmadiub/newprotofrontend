@@ -3,7 +3,7 @@ import { Grid, Autocomplete } from '@mui/material'
 
 import { styled } from '@mui/system'
 
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator'
+import { TextValidator } from 'react-material-ui-form-validator'
 
 const TextField = styled(TextValidator)(() => ({
     width: '100%',
@@ -86,7 +86,6 @@ const CarsModel = ({
             <Grid item lg={12} md={12} sm={12} xs={12}>
                 <Autocomplete
                     multiple
-                    id="tags-outlined"
                     options={partsList}
                     value={value.parts}
                     getOptionLabel={(option) => option.partBrand}

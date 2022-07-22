@@ -1,13 +1,28 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import ServiceCard from './ServiceCard'
-import { styled } from '@mui/system'
 import { Grid } from '@mui/material'
 import data from './DummyData'
+import { viewServiceApi } from 'api-services/ServicesApi'
 
 const ViewServices = () => {
+    const [servicesData, setServicesData] = useState([])
+
+    const getServicesList = async () => {
+        try {
+            const { data } = await viewServiceApi()
+            setServicesData(data.data)
+        } catch (error) {
+            console.log('Error', error)
+        }
+    }
+
+    useEffect(() => {
+        getServicesList()
+    }, [])
+
     return (
         <Grid container spacing={3}>
-            {data.map((item, index) => {
+            {servicesData.map((item, index) => {
                 return (
                     <Grid
                         item

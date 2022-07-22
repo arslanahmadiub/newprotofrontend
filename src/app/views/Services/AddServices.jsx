@@ -51,7 +51,20 @@ const AddServices = () => {
         const price = sum(newValue.map((item) => parseFloat(item.price)))
         const copyModel = [...carModelObj]
         copyModel[number]['partsCost'] = price
+
+        const discountValue =
+            copyModel[number]['discount'] === ''
+                ? 0
+                : parseFloat(copyModel[number]['discount'])
+        const laborValue =
+            copyModel[number]['laborCost'] === ''
+                ? 0
+                : parseFloat(copyModel[number]['laborCost'])
+
+        const estimateCost = price + laborValue - discountValue
+
         copyModel[number]['parts'] = newValue
+        copyModel[number]['estimateCost'] = estimateCost
         setCarModelObj(copyModel)
     }
 
@@ -94,8 +107,67 @@ const AddServices = () => {
     const handelCarModelDataChange = (e, index) => {
         const { name, value } = e.target
         const copyModel = [...carModelObj]
-        copyModel[index][name] = value
-        setCarModelObj(copyModel)
+        if (name === 'discount') {
+            const discountValue = value === '' ? 0 : value
+            const laborValue =
+                copyModel[index]['laborCost'] === ''
+                    ? 0
+                    : copyModel[index]['laborCost']
+            const partsValue =
+                copyModel[index]['partsCost'] === ''
+                    ? 0
+                    : copyModel[index]['partsCost']
+
+            const estimateCost =
+                parseFloat(partsValue) +
+                parseFloat(laborValue) -
+                parseFloat(discountValue)
+
+            copyModel[index][name] = value
+            copyModel[index]['estimateCost'] = estimateCost
+            setCarModelObj(copyModel)
+        } else if (name === 'laborCost') {
+            const laborValue = value === '' ? 0 : value
+            const discountValue =
+                copyModel[index]['discount'] === ''
+                    ? 0
+                    : copyModel[index]['discount']
+            const partsValue =
+                copyModel[index]['partsCost'] === ''
+                    ? 0
+                    : copyModel[index]['partsCost']
+
+            const estimateCost =
+                parseFloat(partsValue) +
+                parseFloat(laborValue) -
+                parseFloat(discountValue)
+
+            copyModel[index][name] = value
+            copyModel[index]['estimateCost'] = estimateCost
+            setCarModelObj(copyModel)
+        } else if (name === 'estimateCost') {
+            const estimateValue = value === '' ? 0 : value
+
+            const discountValue =
+                copyModel[index]['discount'] === ''
+                    ? 0
+                    : copyModel[index]['discount']
+            const partsValue =
+                copyModel[index]['partsCost'] === ''
+                    ? 0
+                    : copyModel[index]['partsCost']
+
+            const laborCostFirst =
+                parseFloat(partsValue) - parseFloat(discountValue)
+            const laborCostSecond = parseFloat(estimateValue) - laborCostFirst
+
+            copyModel[index][name] = value
+            copyModel[index]['laborCost'] = laborCostSecond
+            setCarModelObj(copyModel)
+        } else {
+            copyModel[index][name] = value
+            setCarModelObj(copyModel)
+        }
     }
 
     const handleSubmit = async () => {
