@@ -88,7 +88,7 @@ const CarsModel = ({
                     multiple
                     options={partsList}
                     value={value.parts}
-                    getOptionLabel={(option) => option.partBrand}
+                    getOptionLabel={(option) => option.partNumber}
                     onChange={(e, newValue) =>
                         handelAutoCompletChange(e, newValue, number)
                     }

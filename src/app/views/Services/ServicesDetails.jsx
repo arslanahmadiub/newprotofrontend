@@ -270,14 +270,19 @@ const ServicesDetails = () => {
                                         })}
                                     </Stack>
                                 </div>
-                                <div
+                                <Grid
+                                    container
                                     style={{
                                         display: 'flex',
                                         justifyContent: 'space-between',
                                         width: '100%',
                                     }}
                                 >
-                                    <div
+                                    <Grid
+                                        item
+                                        xs={12}
+                                        sm={12}
+                                        md={2}
                                         style={{
                                             display: 'flex',
                                             color: 'gray',
@@ -286,41 +291,17 @@ const ServicesDetails = () => {
                                             padding: '0 20px',
                                         }}
                                     >
-                                        <div
-                                            style={{
-                                                display: 'flex',
-                                            }}
-                                        >
-                                            <p>Parts Cost</p>
-                                            <p style={{ marginLeft: '10px' }}>
-                                                ${partsCost}
-                                            </p>
-                                        </div>
+                                        <p>Parts Cost</p>
+                                        <p style={{ marginLeft: '10px' }}>
+                                            ${partsCost}
+                                        </p>
+                                    </Grid>
 
-                                        <div
-                                            style={{
-                                                display: 'flex',
-                                                marginLeft: '20px',
-                                            }}
-                                        >
-                                            <p>Labor Cost</p>
-                                            <p style={{ marginLeft: '10px' }}>
-                                                ${laborCost}
-                                            </p>
-                                        </div>
-                                        <div
-                                            style={{
-                                                display: 'flex',
-                                                marginLeft: '20px',
-                                            }}
-                                        >
-                                            <p>Discount</p>
-                                            <p style={{ marginLeft: '10px' }}>
-                                                ${discount}
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div
+                                    <Grid
+                                        item
+                                        xs={12}
+                                        sm={12}
+                                        md={3}
                                         style={{
                                             display: 'flex',
                                             color: 'gray',
@@ -329,14 +310,55 @@ const ServicesDetails = () => {
                                             padding: '0 20px',
                                         }}
                                     >
-                                        <div style={{ display: 'flex' }}>
-                                            <p>Total Estimated Cost</p>
-                                            <p style={{ marginLeft: '10px' }}>
-                                                ${estimateCost}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
+                                        <p>Labor Cost</p>
+                                        <p style={{ marginLeft: '10px' }}>
+                                            ${laborCost}
+                                        </p>
+                                    </Grid>
+
+                                    <Grid
+                                        item
+                                        xs={12}
+                                        sm={12}
+                                        md={2}
+                                        style={{
+                                            display: 'flex',
+                                            color: 'gray',
+                                            fontWeight: '500',
+                                            fontSize: '16px',
+                                            padding: '0 20px',
+                                        }}
+                                    >
+                                        <p>Discount</p>
+                                        <p style={{ marginLeft: '10px' }}>
+                                            ${discount}
+                                        </p>
+                                    </Grid>
+
+                                    <Grid
+                                        item
+                                        xs={12}
+                                        sm={12}
+                                        md={5}
+                                        sx={{
+                                            display: 'flex',
+                                            color: 'gray',
+                                            fontWeight: '500',
+                                            fontSize: '16px',
+                                            padding: '0 20px',
+                                            justifyContent: {
+                                                xs: 'flex-start',
+                                                sm: 'flex-start',
+                                                md: 'flex-end',
+                                            },
+                                        }}
+                                    >
+                                        <p>Total Estimated Cost</p>
+                                        <p style={{ marginLeft: '10px' }}>
+                                            ${estimateCost}
+                                        </p>
+                                    </Grid>
+                                </Grid>
                             </CardContent>
                         </Card>
                     </Grid>

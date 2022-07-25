@@ -1,17 +1,14 @@
 import React from 'react'
-import { Radio, FormControlLabel, Chip } from '@mui/material'
+import { Radio, Chip } from '@mui/material'
 
 const CarDetails = ({ checked, data, onChange }) => {
-    console.log('Checked', checked)
-
     return (
         <div style={{ display: 'flex', marginBottom: '30px' }}>
-            <FormControlLabel
+            <Radio
                 checked={checked}
-                control={<Radio />}
-                sx={{ fontSize: '40px' }}
                 onChange={onChange}
-                value={data.id}
+                value={data._id}
+                sx={{ fontSize: '40px' }}
             />
             <div
                 style={{

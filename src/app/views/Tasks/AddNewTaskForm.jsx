@@ -1,10 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Grid, TextField, IconButton, Autocomplete } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 
 import TaskServices from './TaskServices'
+import { getServiceForSelector } from 'api-services/ServicesApi'
+import { getPartsApi } from 'api-services/PartsApi'
 
-const AddNewTaskForm = () => {
+const AddNewTaskForm = ({ data }) => {
+    const { customerPhone, selectedCar } = data
+    const [servicesData, setServicesData] = useState([])
+    const [partsData, setPartsData] = useState([])
+
     const [taskServiceData, setTaskServiceData] = useState([
         {
             serviceName: '',
@@ -30,30 +36,82 @@ const AddNewTaskForm = () => {
         ])
     }
 
+    const handelTaskPartChange = (event, numser) => {}
+    const handelAutoCompletPartsChange = (event, newValue, number) => {}
+    const handelAutoCompletServiceChange = (event, newValue, number) => {}
+
+    const getSelectorService = async () => {
+        try {
+            const { data } = await getServiceForSelector()
+            if (data.success) {
+                setServicesData(data.data)
+            }
+        } catch (error) {
+            console.log('Error', error)
+        }
+    }
+
+    const getSelectorParts = async () => {
+        try {
+            const { data } = await getPartsApi()
+            if (data.success) {
+                setPartsData(data.data)
+            }
+        } catch (error) {
+            console.log('Error', error)
+        }
+    }
+
+    useEffect(() => {
+        getSelectorService()
+        getSelectorParts()
+    }, [])
+
     return (
         <Grid container spacing={3}>
             <Grid item xs={12} sx={{ marginBottom: '20px' }}>
                 <TextField
                     label="Customer Mobile Number"
                     type="text"
-                    value={'0302-3338991'}
-                    style={{ width: '40%' }}
+                    value={customerPhone}
+                    sx={{
+                        width: {
+                            xs: '100%',
+                            sm: '100%',
+                            md: '40%',
+                        },
+                    }}
                 />
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4}>
-                <TextField label="Make" type="text" value={'2020'} fullWidth />
+                <TextField
+                    label="Make"
+                    type="text"
+                    value={selectedCar.make}
+                    fullWidth
+                />
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4}>
-                <TextField label="Model" type="text" value={'2044'} fullWidth />
+                <TextField
+                    label="Model"
+                    type="text"
+                    value={selectedCar.model}
+                    fullWidth
+                />
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4}>
-                <TextField label="Year" value={'2020'} fullWidth type="text" />
+                <TextField
+                    label="Year"
+                    value={selectedCar.year}
+                    fullWidth
+                    type="text"
+                />
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4}>
                 <TextField
                     label="Rego / Vin"
                     type="text"
-                    value={'Dummy'}
+                    value={selectedCar.region}
                     fullWidth
                 />
             </Grid>
@@ -66,8 +124,38 @@ const AddNewTaskForm = () => {
 
             {taskServiceData.map((item, index) => {
                 return (
-                    <Grid item xs={12}>
-                        <TaskServices data={item} key={index} />
+                    <Grid item xs={12} key={index}>
+                        <TaskServices
+                            data={item}
+                            servicesData={servicesData}
+                            partsData={partsData}
+                            number={index}
+                            onChange={(event, number) =>
+                                handelTaskPartChange(event, number)
+                            }
+                            handelAutoCompletPartsChange={(
+                                e,
+                                newValue,
+                                number
+                            ) => {
+                                handelAutoCompletPartsChange(
+                                    e,
+                                    newValue,
+                                    number
+                                )
+                            }}
+                            handelAutoCompletServiceChange={(
+                                e,
+                                newValue,
+                                number
+                            ) => {
+                                handelAutoCompletServiceChange(
+                                    e,
+                                    newValue,
+                                    number
+                                )
+                            }}
+                        />
                     </Grid>
                 )
             })}

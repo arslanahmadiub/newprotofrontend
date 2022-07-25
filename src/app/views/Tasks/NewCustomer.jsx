@@ -1,20 +1,31 @@
-import { Button, Grid } from '@mui/material'
+import { Grid } from '@mui/material'
 import { styled } from '@mui/system'
-import { Span } from 'app/components/Typography'
+import { addCustomerApi } from 'api-services/CustomersApi'
+
 import React, { useState } from 'react'
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator'
+import SaveIcon from '@mui/icons-material/Save'
+import { LoadingButton } from '@mui/lab'
 
 const TextField = styled(TextValidator)(() => ({
     width: '100%',
     marginBottom: '16px',
 }))
 
-const NewCustomer = () => {
+const NewCustomer = ({ handelNext }) => {
     const [customerData, setCustomerData] = useState({})
-
-    const handleSubmit = (event) => {
-        // console.log("submitted");
-        // console.log(event);
+    const [loading, setLoading] = useState(false)
+    const handleSubmit = async () => {
+        setLoading(true)
+        try {
+            let { data } = await addCustomerApi(customerData)
+            setLoading(false)
+            setCustomerData({})
+            handelNext(data.data.phone)
+        } catch (error) {
+            console.log('Error', error)
+            setLoading(false)
+        }
     }
 
     const handleChange = (event) => {
@@ -88,6 +99,28 @@ const NewCustomer = () => {
                         validators={['required']}
                         errorMessages={['this field is required']}
                     />
+                </Grid>
+                <Grid
+                    item
+                    xs={12}
+                    sx={{
+                        mt: 2,
+                        display: 'flex',
+                        justifyContent: 'space-evenly',
+                        width: '100%',
+                    }}
+                >
+                    <LoadingButton
+                        loading={loading}
+                        loadingPosition="start"
+                        startIcon={<SaveIcon />}
+                        variant="contained"
+                        color="primary"
+                        type="submit"
+                        sx={{ minWidth: '300px' }}
+                    >
+                        Add Customer
+                    </LoadingButton>
                 </Grid>
             </Grid>
         </ValidatorForm>

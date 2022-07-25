@@ -1,45 +1,72 @@
-import React from 'react'
-import { IMaskInput } from 'react-imask'
-import Box from '@mui/material/Box'
-import Input from '@mui/material/Input'
-import InputLabel from '@mui/material/InputLabel'
-import TextField from '@mui/material/TextField'
-import FormControl from '@mui/material/FormControl'
-import OutlinedInput from '@mui/material/OutlinedInput'
-import { Grid } from '@mui/material'
-const TextMaskCustom = React.forwardRef(function TextMaskCustom(props, ref) {
-    const { onChange, ...other } = props
-    return (
-        <IMaskInput
-            {...other}
-            mask="(#0) 000-0000000"
-            definitions={{
-                '#': /[1-9]/,
-            }}
-            inputRef={ref}
-            onAccept={(value) =>
-                onChange({ target: { name: props.name, value } })
-            }
-            overwrite
-        />
-    )
-})
+import React, { useState } from 'react'
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator'
+import SaveIcon from '@mui/icons-material/Save'
+import { LoadingButton } from '@mui/lab'
+import { Box, styled } from '@mui/system'
+import { getCustomerByPhoneApi } from 'api-services/CustomersApi'
 
-const ExistingCustomer = ({ value, onChange }) => {
+const TextField = styled(TextValidator)(() => ({
+    width: '100%',
+    marginBottom: '16px',
+}))
+
+const ExistingCustomer = ({ handelNext }) => {
+    const [phone, setPhone] = useState('')
+    const [loading, setLoading] = useState(false)
+
+    const handleSubmit = async () => {
+        try {
+            setLoading(true)
+            const { data } = await getCustomerByPhoneApi(phone)
+            if (data.success) {
+                handelNext(data.data.phone)
+            }
+            setLoading(false)
+        } catch (error) {
+            console.log('Error', error)
+            setLoading(false)
+        }
+    }
+
     return (
-        <FormControl style={{ display: 'flex', width: '100%' }}>
-            <InputLabel htmlFor="phone-input">Phone Number</InputLabel>
-            <OutlinedInput
-                value={value}
-                onChange={onChange}
+        <ValidatorForm onSubmit={handleSubmit} onError={() => null}>
+            <TextField
+                label="Phone"
+                onChange={(e) => {
+                    setPhone(e.target.value)
+                }}
+                type="text"
                 name="phone"
-                id="phone-input"
-                inputComponent={TextMaskCustom}
-                fullWidth={true}
-                placeholder="Phone Number"
-                label="Phone Number"
+                value={phone || ''}
+                validators={['required']}
+                errorMessages={['this field is required']}
             />
-        </FormControl>
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                }}
+            >
+                <LoadingButton
+                    loading={loading}
+                    loadingPosition="start"
+                    startIcon={<SaveIcon />}
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                    sx={{
+                        minWidth: {
+                            xs: '100%',
+                            sm: '100%',
+                            md: '300px',
+                        },
+                        marginTop: '20px',
+                    }}
+                >
+                    Search Customer
+                </LoadingButton>
+            </Box>
+        </ValidatorForm>
     )
 }
 

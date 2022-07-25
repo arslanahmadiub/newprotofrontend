@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     Button,
     Card,
@@ -19,6 +19,8 @@ import CarDetails from './CarDetails'
 
 import AddNewTaskForm from './AddNewTaskForm'
 import AddNewClientCar from './AddNewClientCar'
+import { getCarApi } from 'api-services/CarsApi'
+import { isEmpty } from 'lodash'
 
 const AddTask = () => {
     const titleList = ['Add New Task', 'Car Details']
@@ -26,37 +28,40 @@ const AddTask = () => {
     const [stage, setStage] = useState(0)
     const [showCarModel, setShowCarModel] = useState(false)
 
-    const [phone, setPhone] = useState('')
+    const [newTaskData, setNewTaskData] = useState({
+        customerPhone: '',
+        selectedCar: null,
+    })
+
     const [radioValue, setRadioValue] = useState('existing')
-    const [carDetailsData, setCarDetailsData] = useState([
-        {
-            id: 1,
-            make: 'Dummy',
-            model: 'Dummy',
-            year: '2020',
-            region: 'Th-1234',
-            selected: false,
-        },
-        {
-            id: 2,
-            make: 'Dummy2',
-            model: 'Dummy2',
-            year: '2022',
-            region: 'Th-3423',
-            selected: false,
-        },
-    ])
+    const [carDetailsData, setCarDetailsData] = useState([])
 
     const handelRadioValueChange = (e) => {
         setRadioValue(e.target.value)
     }
 
-    const handelPhoneChange = (e) => {
-        setPhone(e.target.value)
+    const getCars = async () => {
+        try {
+            const { data } = await getCarApi()
+            if (data.success) {
+                data.data.forEach((item) => {
+                    item.selected = false
+                })
+                setCarDetailsData(data.data)
+            }
+        } catch (error) {
+            console.log('Error', error)
+        }
     }
 
+    useEffect(() => {
+        getCars()
+    }, [])
+
     const handelNext = () => {
-        setStage(stage + 1)
+        if (stage === 1 && newTaskData.selectedCar !== null) {
+            setStage(stage + 1)
+        }
     }
 
     const handelAddTask = () => {}
@@ -64,11 +69,17 @@ const AddTask = () => {
     const handelCarDetailChange = (e) => {
         let selectedCarId = e.target.value
         let selectedData = carDetailsData.map((item) => {
-            return item.id == selectedCarId
+            return item._id == selectedCarId
                 ? { ...item, selected: true }
                 : { ...item, selected: false }
         })
         setCarDetailsData(selectedData)
+        setNewTaskData({
+            ...newTaskData,
+            ['selectedCar']: carDetailsData.find(
+                (item) => item._id === selectedCarId
+            ),
+        })
     }
 
     const handelAddNew = () => {
@@ -119,28 +130,42 @@ const AddTask = () => {
                                 <Grid item xs={12} sx={{ mt: 3 }}>
                                     {radioValue === 'existing' ? (
                                         <ExistingCustomer
-                                            onChange={handelPhoneChange}
-                                            value={phone}
+                                            handelNext={(data) => {
+                                                setNewTaskData({
+                                                    ...newTaskData,
+                                                    ['customerPhone']: data,
+                                                })
+                                                setStage(stage + 1)
+                                            }}
                                         />
                                     ) : (
-                                        <NewCustomer />
+                                        <NewCustomer
+                                            handelNext={(data) => {
+                                                setNewTaskData({
+                                                    ...newTaskData,
+                                                    ['customerPhone']: data,
+                                                })
+                                                setStage(stage + 1)
+                                            }}
+                                        />
                                     )}
                                 </Grid>
                             </Grid>
                         </>
                     ) : stage === 1 ? (
-                        carDetailsData.map((item, index) => {
+                        !isEmpty(carDetailsData) &&
+                        carDetailsData.map((item) => {
                             return (
                                 <CarDetails
                                     checked={item.selected}
                                     data={item}
-                                    key={item.id}
+                                    key={item._id}
                                     onChange={handelCarDetailChange}
                                 />
                             )
                         })
                     ) : (
-                        <AddNewTaskForm />
+                        <AddNewTaskForm data={newTaskData} />
                     )}
                     <Grid
                         item
@@ -152,7 +177,7 @@ const AddTask = () => {
                             width: '100%',
                         }}
                     >
-                        {stage === 0 || stage === 1 ? (
+                        {stage === 1 ? (
                             <Button
                                 variant="contained"
                                 sx={{ minWidth: '300px' }}
@@ -177,6 +202,9 @@ const AddTask = () => {
                         open={showCarModel}
                         handleClose={handleClose}
                         loading={true}
+                        handelUpdate={() => {
+                            getCars()
+                        }}
                     />
                 </CardContent>
             </Card>

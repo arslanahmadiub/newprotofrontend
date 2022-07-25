@@ -22,10 +22,14 @@ const addNewCarInServiceApi = async (serviceId, requestData) => {
         requestData
     )
 }
+const getServiceForSelector = async () => {
+    return await axios.get(`${baseurl}/service/forselector/get`)
+}
 
 export {
     addServiceApi,
     viewServiceApi,
     detailServiceApi,
     addNewCarInServiceApi,
+    getServiceForSelector,
 }
