@@ -1,57 +1,59 @@
 import React from 'react'
-import { Grid, TextField, Autocomplete } from '@mui/material'
+import { Grid, Autocomplete } from '@mui/material'
+
+import { styled } from '@mui/system'
+
+import { TextValidator } from 'react-material-ui-form-validator'
+
+const TextField = styled(TextValidator)(() => ({
+    width: '100%',
+    marginBottom: '16px',
+}))
 
 const TaskServices = ({
     data,
     servicesData,
     partsData,
     number,
-    onChange,
-    handelAutoCompletPartsChange,
     handelAutoCompletServiceChange,
 }) => {
     const {
-        serviceName,
-        partsValue,
+        serviceValue,
+        parts,
         partsCost,
         laborCost,
         discount,
-        estimationPrice,
+        estimateCost,
     } = data
 
     return (
         <Grid container spacing={3}>
             <Grid item lg={12} md={12} sm={12} xs={12}>
                 <Autocomplete
-                    id="tags-outlined"
-                    options={servicesData}
-                    value={serviceName}
-                    getOptionLabel={(option) => option.serviceName}
-                    filterSelectedOptions
+                    id="free-solo-demo"
                     onChange={(e, newValue) =>
                         handelAutoCompletServiceChange(e, newValue, number)
                     }
+                    value={serviceValue}
+                    options={servicesData.map((option) => option.serviceName)}
                     renderInput={(params) => (
                         <TextField
                             {...params}
-                            label="Select Service"
-                            placeholder="Select Service"
+                            label="Services"
+                            placeholder="Select Services"
                         />
                     )}
-                    ChipProps={{ color: 'primary' }}
                 />
             </Grid>
             <Grid item lg={12} md={12} sm={12} xs={12}>
                 <Autocomplete
                     multiple
                     id="tags-outlined"
+                    readOnly
                     options={partsData}
-                    value={partsValue}
+                    value={parts}
                     getOptionLabel={(option) => option.partNumber}
                     filterSelectedOptions
-                    onChange={(e, newValue) =>
-                        handelAutoCompletPartsChange(e, newValue, number)
-                    }
                     renderInput={(params) => (
                         <TextField
                             {...params}
@@ -70,7 +72,11 @@ const TaskServices = ({
                     value={partsCost}
                     name="partsCost"
                     fullWidth
-                    onChange={(e) => onChange(e, number)}
+                    InputProps={{
+                        readOnly: true,
+                    }}
+                    validators={['required']}
+                    errorMessages={['this field is required']}
                 />
             </Grid>
             <Grid item lg={3} md={3} sm={6} xs={12}>
@@ -80,7 +86,11 @@ const TaskServices = ({
                     value={laborCost}
                     name="laborCost"
                     fullWidth
-                    onChange={(e) => onChange(e, number)}
+                    InputProps={{
+                        readOnly: true,
+                    }}
+                    validators={['required']}
+                    errorMessages={['this field is required']}
                 />
             </Grid>
             <Grid item lg={3} md={3} sm={6} xs={12}>
@@ -90,17 +100,25 @@ const TaskServices = ({
                     value={discount}
                     name="discount"
                     fullWidth
-                    onChange={(e) => onChange(e, number)}
+                    InputProps={{
+                        readOnly: true,
+                    }}
+                    validators={['required']}
+                    errorMessages={['this field is required']}
                 />
             </Grid>
             <Grid item lg={3} md={3} sm={6} xs={12}>
                 <TextField
-                    label="Estimation Price"
+                    label="Estimate Cost"
                     type="number"
-                    value={estimationPrice}
-                    name="estimationPrice"
+                    value={estimateCost}
+                    name="estimateCost"
                     fullWidth
-                    onChange={(e) => onChange(e, number)}
+                    InputProps={{
+                        readOnly: true,
+                    }}
+                    validators={['required']}
+                    errorMessages={['this field is required']}
                 />
             </Grid>
         </Grid>
@@ -108,19 +126,3 @@ const TaskServices = ({
 }
 
 export default TaskServices
-
-const topService = [
-    { title: 'Service 1' },
-    { title: 'Service 2' },
-    { title: 'Service 3' },
-    { title: 'Service 4' },
-    { title: 'Service 5' },
-]
-
-const topParts = [
-    { title: 'Parts 1' },
-    { title: 'Parts 2' },
-    { title: 'Parts 3' },
-    { title: 'Parts 4' },
-    { title: 'Parts 5' },
-]

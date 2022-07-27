@@ -8,9 +8,7 @@ import {
     RadioGroup,
     FormControlLabel,
     FormControl,
-    Autocomplete,
     Box,
-    TextField,
 } from '@mui/material'
 
 import ExistingCustomer from './ExistingCustomer'
@@ -165,7 +163,10 @@ const AddTask = () => {
                             )
                         })
                     ) : (
-                        <AddNewTaskForm data={newTaskData} />
+                        <AddNewTaskForm
+                            data={newTaskData}
+                            reset={() => setStage(0)}
+                        />
                     )}
                     <Grid
                         item
@@ -208,58 +209,8 @@ const AddTask = () => {
                     />
                 </CardContent>
             </Card>
-            {stage === 2 && (
-                <Card sx={{ marginTop: '30px' }}>
-                    <CardContent>
-                        <Grid container>
-                            <Grid item lg={12} md={12} sm={12} xs={12}>
-                                <Autocomplete
-                                    multiple
-                                    id="tags-outlined"
-                                    options={topEmployies}
-                                    getOptionLabel={(option) => option.title}
-                                    filterSelectedOptions
-                                    renderInput={(params) => (
-                                        <TextField
-                                            {...params}
-                                            label="Assign Employies"
-                                            placeholder="Search Employies"
-                                        />
-                                    )}
-                                    ChipProps={{ color: 'primary' }}
-                                />
-                            </Grid>
-                        </Grid>
-                    </CardContent>
-                </Card>
-            )}
-            {stage === 2 && (
-                <Box
-                    sx={{
-                        display: 'flex',
-                        justifyContent: 'flex-end',
-                        marginTop: '30px',
-                    }}
-                >
-                    <Button
-                        variant="contained"
-                        sx={{ minWidth: '300px' }}
-                        onClick={handelAddTask}
-                    >
-                        Add Task
-                    </Button>
-                </Box>
-            )}
         </Box>
     )
 }
 
 export default AddTask
-
-const topEmployies = [
-    { title: 'Employies 1' },
-    { title: 'Employies 2' },
-    { title: 'Employies 3' },
-    { title: 'Employies 4' },
-    { title: 'Employies 5' },
-]
