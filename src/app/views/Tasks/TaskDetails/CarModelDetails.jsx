@@ -1,27 +1,49 @@
-import React from 'react'
-import Box from '@mui/material/Box'
-import Container from '@mui/material/Container'
-import { styled } from '@mui/material/styles'
-import Paper from '@mui/material/Paper'
-import Grid from '@mui/material/Grid'
+import { Favorite, FavoriteBorder, MoreVert, Share } from '@mui/icons-material'
+import {
+    Avatar,
+    Card,
+    CardActions,
+    CardContent,
+    CardHeader,
+    CardMedia,
+    Checkbox,
+    IconButton,
+    Typography,
+    Box,
+} from '@mui/material'
 
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-}))
+import Grid from '@mui/material/Grid'
+import DirectionsCarOutlinedIcon from '@mui/icons-material/DirectionsCarOutlined'
+import ConstructionOutlinedIcon from '@mui/icons-material/ConstructionOutlined'
+import SpeedOutlinedIcon from '@mui/icons-material/SpeedOutlined'
 
 const CarModelDetails = () => {
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={1}>
-                <Grid item xs={8} direction={'column'} spacing={1}>
-                    <Item>1</Item>
+        <Card sx={{ margin: 1 }}>
+            <CardHeader title="HNH-1234" />
+            <CardContent>
+                <Grid container direction={'row'} spacing={2}>
+                    <Grid item direction={'row'} xs={4}>
+                        <DirectionsCarOutlinedIcon
+                            spacing={3}
+                            color={'primary'}
+                        />
+                        Audi A8 2022
+                    </Grid>
+                    <Grid item xs={4}>
+                        <ConstructionOutlinedIcon
+                            spacing={3}
+                            color={'primary'}
+                        />
+                        Eng-12345
+                    </Grid>
+                    <Grid item xs={4}>
+                        <SpeedOutlinedIcon spacing={3} color={'primary'} />
+                        10,000
+                    </Grid>
                 </Grid>
-            </Grid>
-        </Box>
+            </CardContent>
+        </Card>
     )
 }
 
