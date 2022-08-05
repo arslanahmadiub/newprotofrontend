@@ -31,10 +31,10 @@ const index = () => {
                     <Attachments />
                 </Grid>
                 <Grid item xs={12}>
-                    <Attachments />
+                    <CarRecentOrders />
                 </Grid>
                 <Grid item xs={8}>
-                    <Attachments />
+                    <CommentsSection />
                 </Grid>
             </Grid>
         </Box>
