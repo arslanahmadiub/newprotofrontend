@@ -12,7 +12,6 @@ import {
     Typography,
 } from '@mui/material'
 
-import Grid from '@mui/material/Grid'
 import SettingsSuggestOutlinedIcon from '@mui/icons-material/SettingsSuggestOutlined'
 import MiscellaneousServicesOutlinedIcon from '@mui/icons-material/MiscellaneousServicesOutlined'
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined'
@@ -31,24 +30,24 @@ const TaskStatus = () => {
             />
 
             <CardContent>
-                <Grid container direction={'column'} spacing={2}>
-                    <Grid item xs={2}>
+                <Stack direction={'column'} spacing={2}>
+                    <Stack xs={2}>
                         <Typography variant="h5" component="h2">
                             Order # 78900
                         </Typography>
-                    </Grid>
+                    </Stack>
 
-                    <Grid item direction={'row'}>
-                        <Grid container direction={'column'} xs={4}>
-                            <Grid item xs={4}>
+                    <Stack direction={'row'}>
+                        <Stack direction={'column'} xs={4}>
+                            <Stack xs={4}>
                                 <Typography
                                     variant="body2"
                                     color="text.secondary"
                                 >
                                     ASSIGNED TO
                                 </Typography>
-                            </Grid>
-                            <Grid item direction={'row'} xs={4}>
+                            </Stack>
+                            <Stack direction={'row'} xs={4}>
                                 <Stack direction="row" spacing={2}>
                                     <Avatar
                                         alt="Cindy Baker"
@@ -58,30 +57,46 @@ const TaskStatus = () => {
                                         Arya Stark
                                     </Typography>
                                 </Stack>
-                            </Grid>
-                        </Grid>
+                            </Stack>
+                        </Stack>
 
-                        <Grid container direction={'column'} xs={4}>
-                            <Grid item xs={4}>
+                        <Stack direction={'column'} xs={4}>
+                            <Stack xs={4}>
                                 <Typography
                                     variant="body2"
                                     color="text.secondary"
                                 >
                                     DATE
                                 </Typography>
-                            </Grid>
-                            <Grid item direction={'row'} xs={4}>
+                            </Stack>
+                            <Stack direction={'row'} xs={4}>
                                 <CalendarMonthOutlinedIcon
                                     spacing={1}
                                     color={'primary'}
                                 />
                                 Tuesday 10am
-                            </Grid>
-                        </Grid>
-                    </Grid>
+                            </Stack>
+                        </Stack>
+                    </Stack>
 
-                    <Grid item direction={'row'}>
-                        <Stack direction={'column'} xs={4} spacing={3}>
+                    <Stack
+                        direction={'row'}
+                        alignItems="center"
+                        justifyContent = 'space-between'
+                        spacing={1}
+                        lg={8}
+                        md={8}
+                        sm={12}
+                        xs={12}
+                    >
+                        <Stack
+                            direction={'column'}
+                            spacing={1}
+                            lg={4}
+                            md={4}
+                            sm={4}
+                            xs={4}
+                        >
                             <Stack xs={4}>
                                 <Typography
                                     variant="body2"
@@ -90,31 +105,42 @@ const TaskStatus = () => {
                                     CUSTOMER
                                 </Typography>
                             </Stack>
-                            <Stack direction={'row'} xs={4}>
+                            <Stack
+                                direction={'row'}
+                                alignItems="center"
+                                spacing={2}
+                                lg={4}
+                                md={4}
+                                sm={4}
+                                xs={4}
+                            >
                                 <Avatar
                                     alt="Cindy Baker"
                                     src="https://images.unsplash.com/photo-1516195851888-6f1a981a862e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=405&q=80"
                                 />
-                                <Typography variant="body">
+                                <Typography variant="body1">
                                     Arya Stark
                                 </Typography>
                             </Stack>
                         </Stack>
 
-                        <Grid container direction={'column'} xs={4}>
-                            <Grid item xs={4}>
+                        <Stack direction={'column'} lg={4} md={4} sm={4} xs={4}>
+                            <Stack xs={4}>
                                 <Typography
                                     variant="body2"
                                     color="text.secondary"
                                 >
                                     STATUS
                                 </Typography>
-                                In progress
-                            </Grid>
-                        </Grid>
-                    </Grid>
+                                <Typography variant="body1" color="gray">
+                                    In progress
+                                </Typography>
+                            </Stack>
+                        </Stack>
+                    </Stack>
 
-                    <Grid item>
+                    {/* overview section  */}
+                    <Stack>
                         <Typography variant="h6" component="h2">
                             Overview:
                         </Typography>
@@ -124,25 +150,39 @@ const TaskStatus = () => {
                             cup of frozen peas along with the mussels, if you
                             like.
                         </Typography>
-                    </Grid>
+                    </Stack>
 
-                    <Grid item xs={8}>
+                    {/* bottom menu */}
+                    <Stack
+                        direction={'row'}
+                        spacing={2}
+                        lg={12}
+                        md={12}
+                        sm={12}
+                        xs={12}
+                    >
                         <SettingsSuggestOutlinedIcon
                             spacing={1}
                             color={'primary'}
                         />
-                        Service Name
-                    </Grid>
-                    <Grid item xs={8}>
+                        <Typography>Service Name</Typography>
+                    </Stack>
+                    <Stack
+                        direction={'row'}
+                        spacing={2}
+                        lg={12}
+                        md={12}
+                        sm={12}
+                        xs={12}
+                    >
                         <MiscellaneousServicesOutlinedIcon
                             spacing={1}
                             color={'primary'}
                         />
-                        Extra Parts
-                    </Grid>
-                </Grid>
+                        <Typography>Extra Parts</Typography>
+                    </Stack>
+                </Stack>
             </CardContent>
-
         </Card>
     )
 }

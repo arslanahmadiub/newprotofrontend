@@ -28,76 +28,136 @@ const CommentsSection = () => {
             <CardHeader title="Comments (51)" />
 
             <CardContent spacing={2}>
+                {/* Show Comments */}
                 <Stack>
-                    <Grid container direction={'row'}>
-                        <Grid item direction={'column'} xs={10}>
-                            <Stack direction="row" spacing={2}>
-                                <Avatar
-                                    alt="Cindy Baker"
-                                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
-                                />
-                                <Typography variant="h6">
-                                    Jeremy Tomlinson
-                                </Typography>
-                            </Stack>
-                            <Typography variant="body2" color="text.secondary">
-                                Nice work, makes me think of the Money Pit.
-                            </Typography>
-                        </Grid>
-
-                        <Grid container direction={'column'} xs={2}>
-                            5 hours ago
-                        </Grid>
-                    </Grid>
-
-                    <Grid container direction={'row'}>
-                        <Grid item direction={'column'} xs={10}>
-                            <Stack direction="row" spacing={2}>
-                                <Avatar
-                                    alt="Cindy Baker"
-                                    src="https://images.unsplash.com/photo-1551024739-78e9d60c45ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
-                                />
-                                <Typography variant="h6">
-                                    Jeremy Tomlinson
-                                </Typography>
-                            </Stack>
-                            <Typography variant="body2" color="text.secondary">
-                                Nice work, makes me think of the Money Pit.
-                            </Typography>
-                        </Grid>
-
-                        <Grid container direction={'column'} xs={2}>
-                            5 hours ago
-                        </Grid>
-                    </Grid>
-                </Stack>
-
-                <Stack
-                    direction="row"
-                    justifyContent="center"
-                    alignItems="center"
-                    spacing={12}
-                >
-                    <LoadingButton
-                        loading
-                        loadingPosition="start"
-                        startIcon={<SaveIcon />}
-                        // variant="outlined"
-                        color="error"
+                    {/* comment 1 */}
+                    <Stack
+                        direction={{
+                            lg: 'row',
+                            md: 'row',
+                            sm: 'row',
+                            xs: 'column',
+                        }}
+                        justifyContent="space-between"
+                        alignItems="center"
+                        // spacing={12}
+                        lg={10}
+                        md={10}
+                        sm={12}
+                        xs={12}
                     >
-                        Load More
-                    </LoadingButton>
+                        <Stack
+                            direction={'row'}
+                            lg={10}
+                            md={10}
+                            sm={12}
+                            xs={12}
+                            justifyContent="space-between"
+                            alignItems={'center'}
+                            spacing={2}
+                        >
+                            <Avatar
+                                alt="Cindy Baker"
+                                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80s"
+                            />
+                            <Stack direction="column" spacing={0}>
+                                <Typography variant="h6">
+                                    Jeremy Tomlinson
+                                </Typography>
+                                <Typography
+                                    variant="body2"
+                                    color="text.secondary"
+                                >
+                                    Nice work, makes me think of the Money Pit.
+                                </Typography>
+                            </Stack>
+                        </Stack>
+
+                        <Stack direction={'column'} xs={2}>
+                            5 hours ago
+                        </Stack>
+                    </Stack>
+
+                    {/* comment 2 */}
+                    <Stack
+                        direction={{
+                            lg: 'row',
+                            md: 'row',
+                            sm: 'row',
+                            xs: 'column',
+                        }}
+                        justifyContent="space-between"
+                        alignItems="center"
+                        // spacing={12}
+                        lg={10}
+                        md={10}
+                        sm={12}
+                        xs={12}
+                    >
+                        <Stack
+                            direction={'row'}
+                            lg={10}
+                            md={10}
+                            sm={12}
+                            xs={12}
+                            justifyContent="space-between"
+                            alignItems={'center'}
+                            spacing={2}
+                        >
+                            <Avatar
+                                alt="Cindy Baker"
+                                src="https://images.unsplash.com/photo-1551024739-78e9d60c45ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
+                            />
+                            <Stack direction="column" spacing={0}>
+                                <Typography variant="h6">
+                                    Jeremy Tomlinson
+                                </Typography>
+                                <Typography
+                                    variant="body2"
+                                    color="text.secondary"
+                                >
+                                    Nice work, makes me think of the Money Pit.
+                                </Typography>
+                            </Stack>
+                        </Stack>
+
+                        <Stack direction={'column'} xs={2}>
+                            5 hours ago
+                        </Stack>
+                    </Stack>
+
+                    {/* load more comments button  */}
+                    <Stack
+                        direction="row"
+                        justifyContent="center"
+                        alignItems="center"
+                        spacing={12}
+                    >
+                        <LoadingButton
+                            loading
+                            loadingPosition="start"
+                            startIcon={<SaveIcon />}
+                            // variant="outlined"
+                            color="error"
+                        >
+                            Load More
+                        </LoadingButton>
+                    </Stack>
                 </Stack>
 
                 {/* Input Form Comments */}
                 <Stack>
                     <TextareaAutosize
                         aria-label="minimum height"
-                        minRows={3}
+                        minRows={4}
                         fullwidth
                         placeholder="Your comment..."
                         style={{
-                            width: 200,
+                            width: '100%',
+                            borderBottom: 'none',
+                            borderTopLeftRadius: '5px',
+                            borderTopRightRadius: '5px',
+                            padding: '5px',
                         }}
                     />
                     <Stack
@@ -111,6 +171,8 @@ const CommentsSection = () => {
                             border: '1px solid darkgray',
                             padding: '10px',
                             borderRadius: '5px',
+                            borderTopLeftRadius: '0px',
+                            borderTopRightRadius: '0px',
                         }}
                     >
                         <Stack
