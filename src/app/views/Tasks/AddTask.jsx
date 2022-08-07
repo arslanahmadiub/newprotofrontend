@@ -67,7 +67,7 @@ const AddTask = () => {
     const handelCarDetailChange = (e) => {
         let selectedCarId = e.target.value
         let selectedData = carDetailsData.map((item) => {
-            return item._id == selectedCarId
+            return item._id === selectedCarId
                 ? { ...item, selected: true }
                 : { ...item, selected: false }
         })

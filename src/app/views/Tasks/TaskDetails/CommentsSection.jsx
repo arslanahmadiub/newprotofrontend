@@ -1,23 +1,17 @@
-import { Favorite, FavoriteBorder, MoreVert, Share } from '@mui/icons-material'
 
-import { Box, styled, useTheme } from '@mui/system'
-import { TabPanel } from '@mui/lab'
+import {  styled } from '@mui/system'
 import {
     Avatar,
     Stack,
     Button,
     Card,
-    CardActions,
     CardContent,
     CardHeader,
-    CardMedia,
-    Checkbox,
     IconButton,
     Typography,
     TextareaAutosize,
 } from '@mui/material'
 
-import Grid from '@mui/material/Grid'
 import SendIcon from '@mui/icons-material/Send'
 import LoadingButton from '@mui/lab/LoadingButton'
 import SaveIcon from '@mui/icons-material/Save'
@@ -184,7 +178,6 @@ const CommentsSection = () => {
                             backgroundColor: 'lightgrey',
                             padding: '10px',
                             border: '1px solid darkgray',
-                            padding: '10px',
                             borderRadius: '5px',
                             borderTopLeftRadius: '0px',
                             borderTopRightRadius: '0px',

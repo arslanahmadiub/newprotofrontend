@@ -1,26 +1,14 @@
-import { Favorite, FavoriteBorder, MoreVert, Share } from '@mui/icons-material'
-import { TabPanel } from '@mui/lab'
+
 import {
-    Avatar,
     Stack,
-    Button,
     Card,
-    CardActions,
     CardContent,
     CardHeader,
-    CardMedia,
-    Checkbox,
     IconButton,
     Typography,
-    TextareaAutosize,
 } from '@mui/material'
 
-import Grid from '@mui/material/Grid'
-import SendIcon from '@mui/icons-material/Send'
-import LoadingButton from '@mui/lab/LoadingButton'
-import SaveIcon from '@mui/icons-material/Save'
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined'
-import AlternateEmailOutlinedIcon from '@mui/icons-material/AlternateEmailOutlined'
 import CloudUploadOutlinedIcon from '@mui/icons-material/CloudUploadOutlined'
 
 const Attachments = () => {
@@ -31,14 +19,8 @@ const Attachments = () => {
             <CardContent>
                 <Stack
                     direction="column"
-                    // justifyContent="space-between"
-                    // spacing={12}
                     sx={{
-                        // paddingY: '10px',
                         border: '1px solid lightgrey',
-                        // justifyContent: 'center',
-                        // alignItems: "center",
-                        // alignContent: 'center',
                         padding: '10px',
                         borderRadius: '5px',
                         width: 'fit',
@@ -58,9 +40,6 @@ const Attachments = () => {
                 {/* uploaded items */}
                 <Stack
                     direction="column"
-                    // justifyContent="space-between"
-                    // alignItems="center"
-                    // spacing={1}
                     sx={{ width: '100%' }}
                 >
                     {/* Item 1  */}

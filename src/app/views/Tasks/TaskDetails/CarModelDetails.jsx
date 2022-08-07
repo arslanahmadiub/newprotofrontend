@@ -1,15 +1,8 @@
-import { Favorite, FavoriteBorder, MoreVert, Share } from '@mui/icons-material'
+
 import {
-    Avatar,
     Card,
-    CardActions,
     CardContent,
     CardHeader,
-    CardMedia,
-    Checkbox,
-    IconButton,
-    Typography,
-    Box,
 } from '@mui/material'
 
 import Stack from '@mui/material/Stack'
