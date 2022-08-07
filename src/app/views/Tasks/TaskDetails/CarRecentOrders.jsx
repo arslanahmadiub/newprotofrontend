@@ -12,6 +12,10 @@ import {
     Avatar,
 } from '@mui/material'
 
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye'
+import CreateIcon from '@mui/icons-material/Create'
+import DeleteIcon from '@mui/icons-material/Delete'
+
 const CardHeader = styled('div')(() => ({
     paddingLeft: '24px',
     paddingRight: '24px',
@@ -28,7 +32,7 @@ const Title = styled('span')(() => ({
 }))
 
 const ProductTable = styled(Table)(() => ({
-    minWidth: 400,
+    overflowY: 'hidden',
     whiteSpace: 'pre',
     '& small': {
         height: 15,
@@ -56,6 +60,15 @@ const Small = styled('small')(({ bgcolor }) => ({
     boxShadow: '0 0 2px 0 rgba(0, 0, 0, 0.12), 0 2px 2px 0 rgba(0, 0, 0, 0.24)',
 }))
 
+const DeleteButton = styled(IconButton)(() => ({
+    color: 'red'
+}))
+const EditButton = styled(IconButton)(() => ({
+    color: '#FFDD39',
+}))
+const EyeButton = styled(IconButton)(() => ({
+    color: 'blue',
+}))
 
 const CarRecentOrders = () => {
     const { palette } = useTheme()
@@ -68,8 +81,12 @@ const CarRecentOrders = () => {
             <CardHeader>
                 <Title>Recent Orders</Title>
             </CardHeader>
-            <Box overflow="auto">
-                <ProductTable>
+            <Box overflow="scroll">
+                <ProductTable
+                    sx={{
+                        minWidth: '1000px',
+                    }}
+                >
                     <TableHead>
                         <TableRow>
                             <TableCell sx={{ px: 3 }} colSpan={2}>
@@ -156,11 +173,16 @@ const CarRecentOrders = () => {
 
                                 {/* Action  */}
                                 <TableCell sx={{ px: 0 }} colSpan={2}>
-                                    <IconButton>
-                                        <Icon color="primary">visible</Icon>
-                                        <Icon color="primary">edit</Icon>
-                                        <Icon color="red">delete</Icon>
-                                    </IconButton>
+                                    <EyeButton>
+                                        <RemoveRedEyeIcon />
+                                    </EyeButton>
+                                    <EditButton>
+                                        <CreateIcon />
+                                    </EditButton>
+                                    <DeleteButton
+                                    >
+                                        <DeleteIcon />
+                                    </DeleteButton>
                                 </TableCell>
                             </TableRow>
                         ))}

@@ -1,4 +1,6 @@
 import { Favorite, FavoriteBorder, MoreVert, Share } from '@mui/icons-material'
+
+import { Box, styled, useTheme } from '@mui/system'
 import { TabPanel } from '@mui/lab'
 import {
     Avatar,
@@ -23,13 +25,17 @@ import AlternateEmailOutlinedIcon from '@mui/icons-material/AlternateEmailOutlin
 import CloudUploadOutlinedIcon from '@mui/icons-material/CloudUploadOutlined'
 
 const CommentsSection = () => {
+    const SubmitButton = styled(Button)(() => ({
+        backgroundColor: '#00BC6B',
+    }))
+
     return (
         <Card sx={{ margin: 1 }}>
             <CardHeader title="Comments (51)" />
 
             <CardContent spacing={2}>
                 {/* Show Comments */}
-                <Stack>
+                <Stack spacing={2}>
                     {/* comment 1 */}
                     <Stack
                         direction={{
@@ -199,13 +205,12 @@ const CommentsSection = () => {
                                 <AlternateEmailOutlinedIcon />
                             </IconButton>
                         </Stack>
-                        <Button
+                        <SubmitButton
                             variant="contained"
-                            color="success"
                             startIcon={<SendIcon />}
                         >
                             Submit
-                        </Button>
+                        </SubmitButton>
                     </Stack>
                 </Stack>
             </CardContent>
