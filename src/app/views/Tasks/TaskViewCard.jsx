@@ -2,7 +2,7 @@ import { Card, CardContent, Box, Typography, Button } from '@mui/material'
 import React from 'react'
 
 const TaskViewCard = ({ data }) => {
-    const { numberPlate, carModel, services, status } = data
+    const { taskCar, service } = data
 
     const dataObject = {
         complete: 'red',
@@ -25,13 +25,13 @@ const TaskViewCard = ({ data }) => {
                     position: 'relative',
                 }}
             >
-                <Typography variant="h6">{numberPlate}</Typography>
-                <Typography variant="subtitle2">{carModel}</Typography>
+                <Typography variant="h6">{taskCar.make}</Typography>
+                <Typography variant="subtitle2">{taskCar.model}</Typography>
                 <Box
                     sx={{
                         width: '10px',
                         height: '10px',
-                        background: dataObject[status],
+                        background: dataObject.complete,
                         borderRadius: '50%',
                         position: 'absolute',
                         top: '10px',
@@ -40,14 +40,14 @@ const TaskViewCard = ({ data }) => {
                 />
             </Box>
             <CardContent>
-                {services.map((item, index) => {
+                {service.map((item, index) => {
                     return (
                         <Box
                             sx={{
                                 display: 'flex',
                                 justifyContent: 'space-between',
                                 borderBottom: `${
-                                    index === services.length - 1
+                                    index === service.length - 1
                                         ? '0px solid lightGray'
                                         : '1px solid lightGray'
                                 }`,
@@ -58,9 +58,9 @@ const TaskViewCard = ({ data }) => {
                             <Typography variant="body2">
                                 {item.serviceName}
                             </Typography>
-                            <Typography variant="body2">
+                            {/* <Typography variant="body2">
                                 {item.servicePart}
-                            </Typography>
+                            </Typography> */}
                         </Box>
                     )
                 })}

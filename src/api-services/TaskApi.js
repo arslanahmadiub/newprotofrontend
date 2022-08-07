@@ -8,4 +8,8 @@ const addTask = async (requestData) => {
     return await axios.post(`${baseurl}/task/add`, requestData)
 }
 
-export { addTask }
+const getTask = async () => {
+    return await axios.get(`${baseurl}/task/get`)
+}
+
+export { addTask, getTask }
