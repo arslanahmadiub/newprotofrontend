@@ -12,7 +12,7 @@ import {
     Box,
 } from '@mui/material'
 
-import Grid from '@mui/material/Grid'
+import Stack from '@mui/material/Stack'
 import DirectionsCarOutlinedIcon from '@mui/icons-material/DirectionsCarOutlined'
 import ConstructionOutlinedIcon from '@mui/icons-material/ConstructionOutlined'
 import SpeedOutlinedIcon from '@mui/icons-material/SpeedOutlined'
@@ -22,26 +22,55 @@ const CarModelDetails = () => {
         <Card sx={{ margin: 1 }}>
             <CardHeader title="HNH-1234" />
             <CardContent>
-                <Grid container direction={'row'} spacing={2}>
-                    <Grid item direction={'row'} xs={4}>
+                <Stack
+                    direction={'row'}
+                    justifyContent='space-between'
+                    alignItems="center"
+                    marginRight={'70px'}
+                >
+                    <Stack
+                        direction={'row'}
+                        alignItems="center"
+                        spacing={2}
+                        lg={4}
+                        md={4}
+                        sm={4}
+                        xs={4}
+                    >
                         <DirectionsCarOutlinedIcon
                             spacing={3}
                             color={'primary'}
                         />
-                        Audi A8 2022
-                    </Grid>
-                    <Grid item xs={4}>
+                        <Stack>Audi A8 2022</Stack>
+                    </Stack>
+                    <Stack
+                        direction={'row'}
+                        alignItems="center"
+                        spacing={2}
+                        lg={4}
+                        md={4}
+                        sm={4}
+                        xs={4}
+                    >
                         <ConstructionOutlinedIcon
                             spacing={3}
                             color={'primary'}
                         />
-                        Eng-12345
-                    </Grid>
-                    <Grid item xs={4}>
+                        <Stack>Eng-12345</Stack>
+                    </Stack>
+                    <Stack
+                        direction={'row'}
+                        alignItems="center"
+                        spacing={2}
+                        lg={4}
+                        md={4}
+                        sm={4}
+                        xs={4}
+                    >
                         <SpeedOutlinedIcon spacing={3} color={'primary'} />
-                        10,000
-                    </Grid>
-                </Grid>
+                        <Stack>10,000</Stack>
+                    </Stack>
+                </Stack>
             </CardContent>
         </Card>
     )

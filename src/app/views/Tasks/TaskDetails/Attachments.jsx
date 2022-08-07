@@ -42,6 +42,7 @@ const Attachments = () => {
                         padding: '10px',
                         borderRadius: '5px',
                         width: 'fit',
+                        hight: '600px',
                     }}
                 >
                     <IconButton aria-label="file upload">
@@ -54,7 +55,7 @@ const Attachments = () => {
                     <Typography variant="body2">{`(This is just a demo dropzone. Selected files are not actually uploaded.)`}</Typography>
                 </Stack>
 
-                {/* Input Form Comments */}
+                {/* uploaded items */}
                 <Stack
                     direction="column"
                     // justifyContent="space-between"

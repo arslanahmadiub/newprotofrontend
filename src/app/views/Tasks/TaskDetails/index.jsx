@@ -41,7 +41,7 @@ const index = () => {
                 <Grid item lg={12} md={12} sm={12} xs={12}>
                     <CarRecentOrders />
                 </Grid>
-                <Grid item lg={8} md={8} sm={12} xs={12}>
+                <Grid item lg={10} md={10} sm={12} xs={12}>
                     <CommentsSection />
                 </Grid>
             </Grid>

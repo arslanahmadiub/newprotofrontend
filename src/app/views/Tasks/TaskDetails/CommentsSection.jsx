@@ -61,7 +61,7 @@ const CommentsSection = () => {
                                 src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80s"
                             />
                             <Stack direction="column" spacing={0}>
-                                <Typography variant="h6">
+                                <Typography variant="body1">
                                     Jeremy Tomlinson
                                 </Typography>
                                 <Typography
@@ -109,7 +109,7 @@ const CommentsSection = () => {
                                 src="https://images.unsplash.com/photo-1551024739-78e9d60c45ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
                             />
                             <Stack direction="column" spacing={0}>
-                                <Typography variant="h6">
+                                <Typography variant="body1">
                                     Jeremy Tomlinson
                                 </Typography>
                                 <Typography
@@ -132,13 +132,21 @@ const CommentsSection = () => {
                         justifyContent="center"
                         alignItems="center"
                         spacing={12}
+                        sx={{
+                            color: 'red',
+                            // backgroundColor: 'red',
+                        }}
                     >
                         <LoadingButton
                             loading
                             loadingPosition="start"
                             startIcon={<SaveIcon />}
                             // variant="outlined"
-                            color="error"
+                            // color="error"
+                            sx={{
+                                color: 'red',
+                                // backgroundColor: 'red',
+                            }}
                         >
                             Load More
                         </LoadingButton>
@@ -158,6 +166,7 @@ const CommentsSection = () => {
                             borderTopLeftRadius: '5px',
                             borderTopRightRadius: '5px',
                             padding: '5px',
+                            resize: 'vertical',
                         }}
                     />
                     <Stack
