@@ -9,11 +9,13 @@ import {
     TableCell,
     TableBody,
     Avatar,
+    Typography,
 } from '@mui/material'
 
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye'
 import CreateIcon from '@mui/icons-material/Create'
 import DeleteIcon from '@mui/icons-material/Delete'
+import { isEmpty } from 'lodash'
 
 const CardHeader = styled('div')(() => ({
     paddingLeft: '24px',
@@ -48,9 +50,8 @@ const ProductTable = styled(Table)(() => ({
     },
 }))
 
-
 const DeleteButton = styled(IconButton)(() => ({
-    color: 'red'
+    color: 'red',
 }))
 const EditButton = styled(IconButton)(() => ({
     color: '#FFDD39',
@@ -59,13 +60,36 @@ const EyeButton = styled(IconButton)(() => ({
     color: 'blue',
 }))
 
-const CarRecentOrders = () => {
+const CarRecentOrders = ({ data }) => {
+    if (isEmpty(data)) {
+        return (
+            <Card elevation={3} sx={{ pt: '20px', mb: 3 }}>
+                <CardHeader>
+                    <Title>Recent Orders</Title>
+                </CardHeader>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        height: '200px',
+                        width: '100%',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}
+                >
+                    <Typography variant="h5">
+                        No recent orders found.
+                    </Typography>
+                </Box>
+            </Card>
+        )
+    }
 
     return (
         <Card elevation={3} sx={{ pt: '20px', mb: 3 }}>
             <CardHeader>
                 <Title>Recent Orders</Title>
             </CardHeader>
+
             <Box overflow="scroll">
                 <ProductTable
                     sx={{
@@ -164,8 +188,7 @@ const CarRecentOrders = () => {
                                     <EditButton>
                                         <CreateIcon />
                                     </EditButton>
-                                    <DeleteButton
-                                    >
+                                    <DeleteButton>
                                         <DeleteIcon />
                                     </DeleteButton>
                                 </TableCell>

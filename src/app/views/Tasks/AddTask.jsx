@@ -27,6 +27,7 @@ const AddTask = () => {
     const [showCarModel, setShowCarModel] = useState(false)
 
     const [newTaskData, setNewTaskData] = useState({
+        customerId: '',
         customerPhone: '',
         selectedCar: null,
     })
@@ -61,8 +62,6 @@ const AddTask = () => {
             setStage(stage + 1)
         }
     }
-
-    const handelAddTask = () => {}
 
     const handelCarDetailChange = (e) => {
         let selectedCarId = e.target.value
@@ -131,7 +130,10 @@ const AddTask = () => {
                                             handelNext={(data) => {
                                                 setNewTaskData({
                                                     ...newTaskData,
-                                                    ['customerPhone']: data,
+                                                    ['customerId']:
+                                                        data.customerId,
+                                                    ['customerPhone']:
+                                                        data.customerPhone,
                                                 })
                                                 setStage(stage + 1)
                                             }}
@@ -141,7 +143,10 @@ const AddTask = () => {
                                             handelNext={(data) => {
                                                 setNewTaskData({
                                                     ...newTaskData,
-                                                    ['customerPhone']: data,
+                                                    ['customerId']:
+                                                        data.customerId,
+                                                    ['customerPhone']:
+                                                        data.customerPhone,
                                                 })
                                                 setStage(stage + 1)
                                             }}

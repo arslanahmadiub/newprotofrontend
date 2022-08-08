@@ -1,8 +1,9 @@
 import { Card, CardContent, Box, Typography, Button } from '@mui/material'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const TaskViewCard = ({ data }) => {
-    const { taskCar, service } = data
+    const { taskCar, service, _id } = data
 
     const dataObject = {
         complete: 'red',
@@ -54,13 +55,11 @@ const TaskViewCard = ({ data }) => {
                                 paddingBottom: '5px',
                                 marginBottom: '15px',
                             }}
+                            key={index}
                         >
                             <Typography variant="body2">
                                 {item.serviceName}
                             </Typography>
-                            {/* <Typography variant="body2">
-                                {item.servicePart}
-                            </Typography> */}
                         </Box>
                     )
                 })}
@@ -72,9 +71,11 @@ const TaskViewCard = ({ data }) => {
                         justifyContent: 'center',
                     }}
                 >
-                    <Button variant="contained" sx={{ minWidth: '200px' }}>
-                        See Details
-                    </Button>
+                    <Link to={`/task/details/${_id}`}>
+                        <Button variant="contained" sx={{ minWidth: '200px' }}>
+                            See Details
+                        </Button>
+                    </Link>
                 </Box>
             </CardContent>
         </Card>

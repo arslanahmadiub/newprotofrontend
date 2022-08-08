@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useState } from 'react'
 import { MoreVert } from '@mui/icons-material'
 import {
     Avatar,
@@ -16,9 +16,11 @@ import {
 import SettingsSuggestOutlinedIcon from '@mui/icons-material/SettingsSuggestOutlined'
 import MiscellaneousServicesOutlinedIcon from '@mui/icons-material/MiscellaneousServicesOutlined'
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined'
+import { isEmpty } from 'lodash'
+import Chip from '@mui/material/Chip'
 
-const TaskStatus = () => {
-    const [anchorEl, setAnchorEl] = React.useState(null)
+const TaskStatus = ({ data }) => {
+    const [anchorEl, setAnchorEl] = useState(null)
     const open = Boolean(anchorEl)
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget)
@@ -60,11 +62,11 @@ const TaskStatus = () => {
                             }}
                         >
                             <MenuItem onClick={handleClose}>On Hold</MenuItem>
-                            <MenuItem onClick={handleClose}>In Progress</MenuItem>
-                            <MenuItem onClick={handleClose}>Assign to</MenuItem>
                             <MenuItem onClick={handleClose}>
-                                Edit
+                                In Progress
                             </MenuItem>
+                            <MenuItem onClick={handleClose}>Assign to</MenuItem>
+                            <MenuItem onClick={handleClose}>Edit</MenuItem>
                             <MenuItem onClick={handleClose}>Delete</MenuItem>
                         </Menu>
                     </Stack>
@@ -165,7 +167,8 @@ const TaskStatus = () => {
                                         src="https://images.unsplash.com/photo-1516195851888-6f1a981a862e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=405&q=80"
                                     />
                                     <Typography variant="body1">
-                                        Arya Stark
+                                        {!isEmpty(data) &&
+                                            `${data.customer.firstName}  ${data.customer.lastName}`}
                                     </Typography>
                                 </Stack>
                             </Stack>
@@ -254,7 +257,16 @@ const TaskStatus = () => {
                             spacing={1}
                             color={'primary'}
                         />
-                        <Typography>Service Name</Typography>
+                        {!isEmpty(data) &&
+                            data.service.map((item, index) => {
+                                return (
+                                    <Chip
+                                        label={item.serviceName}
+                                        color="primary"
+                                        key={index}
+                                    />
+                                )
+                            })}
                     </Stack>
                     <Stack
                         direction={'row'}
@@ -268,7 +280,16 @@ const TaskStatus = () => {
                             spacing={1}
                             color={'primary'}
                         />
-                        <Typography>Extra Parts</Typography>
+                        {!isEmpty(data) &&
+                            data.extraPart.map((item, index) => {
+                                return (
+                                    <Chip
+                                        label={item.partBrand}
+                                        color="primary"
+                                        key={index}
+                                    />
+                                )
+                            })}
                     </Stack>
                 </Stack>
             </CardContent>

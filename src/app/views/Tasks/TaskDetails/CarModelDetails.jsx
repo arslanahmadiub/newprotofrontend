@@ -1,23 +1,19 @@
-
-import {
-    Card,
-    CardContent,
-    CardHeader,
-} from '@mui/material'
+import { Card, CardContent, CardHeader } from '@mui/material'
 
 import Stack from '@mui/material/Stack'
 import DirectionsCarOutlinedIcon from '@mui/icons-material/DirectionsCarOutlined'
 import ConstructionOutlinedIcon from '@mui/icons-material/ConstructionOutlined'
 import SpeedOutlinedIcon from '@mui/icons-material/SpeedOutlined'
+import { isEmpty } from 'lodash'
 
-const CarModelDetails = () => {
+const CarModelDetails = ({ data }) => {
     return (
         <Card sx={{ margin: 1 }}>
             <CardHeader title="HNH-1234" />
             <CardContent>
                 <Stack
                     direction={'row'}
-                    justifyContent='space-between'
+                    justifyContent="space-between"
                     alignItems="center"
                     marginRight={'70px'}
                 >
@@ -49,7 +45,7 @@ const CarModelDetails = () => {
                             spacing={3}
                             color={'primary'}
                         />
-                        <Stack>Eng-12345</Stack>
+                        <Stack>{!isEmpty(data) && data.enginNumber}</Stack>
                     </Stack>
                     <Stack
                         direction={'row'}
@@ -61,7 +57,7 @@ const CarModelDetails = () => {
                         xs={4}
                     >
                         <SpeedOutlinedIcon spacing={3} color={'primary'} />
-                        <Stack>10,000</Stack>
+                        <Stack>{!isEmpty(data) && data.millage}</Stack>
                     </Stack>
                 </Stack>
             </CardContent>

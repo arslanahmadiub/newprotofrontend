@@ -12,4 +12,8 @@ const getTask = async () => {
     return await axios.get(`${baseurl}/task/get`)
 }
 
-export { addTask, getTask }
+const getTaskById = async (id) => {
+    return await axios.get(`${baseurl}/task/get/${id}`)
+}
+
+export { addTask, getTask, getTaskById }

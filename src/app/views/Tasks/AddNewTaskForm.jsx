@@ -24,7 +24,7 @@ const TextField = styled(TextValidator)(() => ({
 }))
 
 const AddNewTaskForm = ({ data, reset }) => {
-    const { customerPhone, selectedCar } = data
+    const { customerId, customerPhone, selectedCar } = data
     const [servicesData, setServicesData] = useState([])
     const [partsData, setPartsData] = useState([])
 
@@ -189,7 +189,7 @@ const AddNewTaskForm = ({ data, reset }) => {
 
     const handleSubmit = async () => {
         let requestedData = {
-            customerPhone,
+            customerId,
             selectedCar,
             totalCostObject,
             extraParts,
@@ -199,15 +199,17 @@ const AddNewTaskForm = ({ data, reset }) => {
         try {
             const { data } = await addTask(requestedData)
             if (data.success) {
-                setTaskServiceData({
-                    serviceId: '',
-                    serviceValue: '',
-                    parts: [],
-                    partsCost: '',
-                    laborCost: '',
-                    discount: '',
-                    estimateCost: '',
-                })
+                setTaskServiceData([
+                    {
+                        serviceId: '',
+                        serviceValue: '',
+                        parts: [],
+                        partsCost: '',
+                        laborCost: '',
+                        discount: '',
+                        estimateCost: '',
+                    },
+                ])
                 setExtraParts([])
                 setTotalCostObject({
                     totalPrice: '',

@@ -21,7 +21,10 @@ const NewCustomer = ({ handelNext }) => {
             let { data } = await addCustomerApi(customerData)
             setLoading(false)
             setCustomerData({})
-            handelNext(data.data.phone)
+            handelNext({
+                customerId: data.data._id,
+                customerPhone: data.data.phone,
+            })
         } catch (error) {
             console.log('Error', error)
             setLoading(false)

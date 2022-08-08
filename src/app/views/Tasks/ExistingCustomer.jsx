@@ -19,7 +19,10 @@ const ExistingCustomer = ({ handelNext }) => {
             setLoading(true)
             const { data } = await getCustomerByPhoneApi(phone)
             if (data.success) {
-                handelNext(data.data.phone)
+                handelNext({
+                    customerId: data.data._id,
+                    customerPhone: data.data.phone,
+                })
             }
             setLoading(false)
         } catch (error) {

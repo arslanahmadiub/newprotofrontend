@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Grid from '@mui/material/Grid'
 
 import TaskStatus from './TaskStatus'
@@ -6,8 +6,32 @@ import Attachments from './Attachments'
 import CarModelDetails from './CarModelDetails'
 import CarRecentOrders from './CarRecentOrders'
 import CommentsSection from './CommentsSection'
+import { getTaskById } from 'api-services/TaskApi'
+import { useParams } from 'react-router-dom'
 
-const index = () => {
+const Main = () => {
+    const params = useParams()
+    const [loading, setLoading] = useState(false)
+    const [taskData, setTaskData] = useState({})
+
+    const getTask = async () => {
+        setLoading(true)
+        try {
+            const { data } = await getTaskById(params.id)
+            if (data.success) {
+                setTaskData(data.data)
+            }
+            setLoading(false)
+        } catch (error) {
+            console.log('Error', error)
+            setLoading(false)
+        }
+    }
+
+    useEffect(() => {
+        getTask()
+    }, [])
+
     return (
         <div>
             <Grid container spacing={1}>
@@ -20,14 +44,14 @@ const index = () => {
                     direction={'column'}
                     spacing={1}
                 >
-                    <TaskStatus />
-                    <CarModelDetails />
+                    <TaskStatus data={taskData} />
+                    <CarModelDetails data={taskData} />
                 </Grid>
                 <Grid item lg={4} md={4} sm={12} xs={12}>
                     <Attachments />
                 </Grid>
                 <Grid item lg={12} md={12} sm={12} xs={12}>
-                    <CarRecentOrders />
+                    <CarRecentOrders data={[]} />
                 </Grid>
                 <Grid item lg={10} md={10} sm={12} xs={12}>
                     <CommentsSection />
@@ -37,4 +61,4 @@ const index = () => {
     )
 }
 
-export default index
+export default Main
