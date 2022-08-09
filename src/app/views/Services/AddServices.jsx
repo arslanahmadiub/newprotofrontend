@@ -61,10 +61,14 @@ const AddServices = () => {
                 ? 0
                 : parseFloat(copyModel[number]['laborCost'])
 
-        const estimateCost = price + laborValue - discountValue
+        const estimateCost = price + laborValue
+
+        const estimateCostWithDiscont = estimateCost - (estimateCost * discountValue / 100)
+
+
 
         copyModel[number]['parts'] = newValue
-        copyModel[number]['estimateCost'] = estimateCost
+        copyModel[number]['estimateCost'] = estimateCostWithDiscont
         setCarModelObj(copyModel)
     }
 
@@ -120,11 +124,14 @@ const AddServices = () => {
 
             const estimateCost =
                 parseFloat(partsValue) +
-                parseFloat(laborValue) -
-                parseFloat(discountValue)
+                parseFloat(laborValue)
+
+
+            const estimateCostWithDiscont = estimateCost - (estimateCost * discountValue / 100)
+
 
             copyModel[index][name] = value
-            copyModel[index]['estimateCost'] = estimateCost
+            copyModel[index]['estimateCost'] = estimateCostWithDiscont
             setCarModelObj(copyModel)
         } else if (name === 'laborCost') {
             const laborValue = value === '' ? 0 : value
@@ -139,11 +146,15 @@ const AddServices = () => {
 
             const estimateCost =
                 parseFloat(partsValue) +
-                parseFloat(laborValue) -
-                parseFloat(discountValue)
+                parseFloat(laborValue)
+
+
+            const estimateCostWithDiscont = estimateCost - (estimateCost * discountValue / 100)
+
+
 
             copyModel[index][name] = value
-            copyModel[index]['estimateCost'] = estimateCost
+            copyModel[index]['estimateCost'] = estimateCostWithDiscont
             setCarModelObj(copyModel)
         } else if (name === 'estimateCost') {
             const estimateValue = value === '' ? 0 : value
@@ -158,7 +169,11 @@ const AddServices = () => {
                     : copyModel[index]['partsCost']
 
             const laborCostFirst =
-                parseFloat(partsValue) - parseFloat(discountValue)
+                parseFloat(partsValue) - (parseFloat(partsValue) * parseFloat(discountValue) / 100)
+
+
+
+
             const laborCostSecond = parseFloat(estimateValue) - laborCostFirst
 
             copyModel[index][name] = value

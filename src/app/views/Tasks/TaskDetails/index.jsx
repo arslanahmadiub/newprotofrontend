@@ -44,7 +44,7 @@ const Main = () => {
                     direction={'column'}
                     spacing={1}
                 >
-                    <TaskStatus data={taskData} />
+                    <TaskStatus data={taskData} taskId={params.id} reload={() => getTask()} />
                     <CarModelDetails data={taskData} />
                 </Grid>
                 <Grid item lg={4} md={4} sm={12} xs={12}>

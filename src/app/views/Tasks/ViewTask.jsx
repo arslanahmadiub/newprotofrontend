@@ -13,6 +13,7 @@ const ViewTask = () => {
         try {
             const { data } = await getTask()
             if (data.success) {
+                console.log("Data", data.data)
                 setTaskData(data.data)
             }
             setLoading(false)
@@ -55,7 +56,7 @@ const ViewTask = () => {
         <Grid container spacing={5} direction="row">
             {taskData.map((item, index) => {
                 return (
-                    <Grid item xs={12} sm={6} md={4} lg={4} key={index}>
+                    <Grid item xs={12} sm={6} md={4} lg={4} key={index} sx={{ marginBottom: "30px" }}>
                         <TaskViewCard data={item} />
                     </Grid>
                 )

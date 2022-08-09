@@ -91,11 +91,17 @@ const AddNewTaskForm = ({ data, reset }) => {
             const extraPartsValue =
                 extraPartsCost === '' ? 0 : parseFloat(extraPartsCost)
             const taxValue = parseFloat(value)
-            const finalPriceValue = totalPriceValue + extraPartsValue + taxValue
+
+
+            const finalPriceValue = totalPriceValue + extraPartsValue
+
+            const finalPriceValueWitTax = finalPriceValue + (finalPriceValue * taxValue / 100)
+
+
             setTotalCostObject({
                 ...totalCostObject,
                 tax: value,
-                finalPrice: finalPriceValue,
+                finalPrice: finalPriceValueWitTax,
             })
         } else {
             setTotalCostObject({
@@ -119,12 +125,16 @@ const AddNewTaskForm = ({ data, reset }) => {
 
         const taxValue = tax === '' ? 0 : parseFloat(tax)
 
-        const finalPriceValue = totalPriceValue + extraPartsValue + taxValue
+        const finalPriceValue = totalPriceValue + extraPartsValue;
+
+
+        const finalPriceValueWithTax = finalPriceValue + (finalPriceValue * taxValue / 100)
+
 
         setTotalCostObject({
             ...totalCostObject,
             totalPrice: totalPriceValue,
-            finalPrice: finalPriceValue,
+            finalPrice: finalPriceValueWithTax,
         })
     }, [taskServiceData])
 
@@ -408,8 +418,6 @@ const AddNewTaskForm = ({ data, reset }) => {
                             type="number"
                             name="extraPartsCost"
                             value={extraPartsCost}
-                            validators={['required']}
-                            errorMessages={['this field is required']}
                         />
                     </Grid>
                     <Grid
@@ -423,8 +431,7 @@ const AddNewTaskForm = ({ data, reset }) => {
                             name="tax"
                             value={tax}
                             onChange={handelFinalCostChange}
-                            validators={['required']}
-                            errorMessages={['this field is required']}
+
                         />
                     </Grid>
                     <Grid

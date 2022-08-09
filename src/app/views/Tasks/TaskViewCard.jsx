@@ -3,16 +3,16 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const TaskViewCard = ({ data }) => {
-    const { taskCar, service, _id } = data
+    const { taskCar, service, _id, status } = data
 
     const dataObject = {
-        complete: 'red',
-        inprogress: 'gold',
-        notstart: 'green',
+        PROGRESS: 'gold',
+        HOLD: 'red',
+        COMPLETE: 'green',
     }
 
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ maxWidth: 345, height: "calc(100% + 50px)", position: "relative" }}>
             <Box
                 sx={{
                     width: '100%',
@@ -32,7 +32,7 @@ const TaskViewCard = ({ data }) => {
                     sx={{
                         width: '10px',
                         height: '10px',
-                        background: dataObject.complete,
+                        background: dataObject[status],
                         borderRadius: '50%',
                         position: 'absolute',
                         top: '10px',
@@ -47,11 +47,10 @@ const TaskViewCard = ({ data }) => {
                             sx={{
                                 display: 'flex',
                                 justifyContent: 'space-between',
-                                borderBottom: `${
-                                    index === service.length - 1
-                                        ? '0px solid lightGray'
-                                        : '1px solid lightGray'
-                                }`,
+                                borderBottom: `${index === service.length - 1
+                                    ? '0px solid lightGray'
+                                    : '1px solid lightGray'
+                                    }`,
                                 paddingBottom: '5px',
                                 marginBottom: '15px',
                             }}
@@ -63,21 +62,23 @@ const TaskViewCard = ({ data }) => {
                         </Box>
                     )
                 })}
-
-                <Box
-                    sx={{
-                        display: 'flex',
-                        marginTop: '30px',
-                        justifyContent: 'center',
-                    }}
-                >
-                    <Link to={`/task/details/${_id}`}>
-                        <Button variant="contained" sx={{ minWidth: '200px' }}>
-                            See Details
-                        </Button>
-                    </Link>
-                </Box>
             </CardContent>
+
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    position: "absolute",
+                    width: "100%",
+                    bottom: "20px"
+                }}
+            >
+                <Link to={`/task/details/${_id}`}>
+                    <Button variant="contained" sx={{ minWidth: '200px', }}>
+                        See Details
+                    </Button>
+                </Link>
+            </Box>
         </Card>
     )
 }
