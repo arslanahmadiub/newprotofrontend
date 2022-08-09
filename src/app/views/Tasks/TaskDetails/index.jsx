@@ -54,7 +54,13 @@ const Main = () => {
                     <CarRecentOrders data={[]} />
                 </Grid>
                 <Grid item lg={10} md={10} sm={12} xs={12}>
-                    <CommentsSection />
+                    <CommentsSection
+                        taskId={params.id}
+                        reCallApi={() => {
+                            getTask()
+                        }}
+                        data={taskData}
+                    />
                 </Grid>
             </Grid>
         </div>

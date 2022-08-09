@@ -18,6 +18,7 @@ import MiscellaneousServicesOutlinedIcon from '@mui/icons-material/Miscellaneous
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined'
 import { isEmpty } from 'lodash'
 import Chip from '@mui/material/Chip'
+import moment from 'moment'
 
 const TaskStatus = ({ data }) => {
     const [anchorEl, setAnchorEl] = useState(null)
@@ -200,7 +201,7 @@ const TaskStatus = ({ data }) => {
                                             spacing={1}
                                             color={'primary'}
                                         />
-                                        Tuesday 10am
+                                        {moment().format('DD-MM-YYYY')}
                                     </Stack>
                                 </Stack>
 
