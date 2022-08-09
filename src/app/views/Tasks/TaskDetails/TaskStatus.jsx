@@ -13,16 +13,10 @@ import {
     Typography,
 } from '@mui/material'
 
-
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Button from '@mui/material/Button';
-
-
-
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogTitle from '@mui/material/DialogTitle'
+import Button from '@mui/material/Button'
 
 import SettingsSuggestOutlinedIcon from '@mui/icons-material/SettingsSuggestOutlined'
 import MiscellaneousServicesOutlinedIcon from '@mui/icons-material/MiscellaneousServicesOutlined'
@@ -31,12 +25,10 @@ import { isEmpty } from 'lodash'
 import Chip from '@mui/material/Chip'
 import moment from 'moment'
 
-
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import { updateTaskStatus } from 'api-services/TaskApi';
-
-
+import FormGroup from '@mui/material/FormGroup'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import { updateTaskStatus } from 'api-services/TaskApi'
+import { Box } from '@mui/system'
 
 const TaskStatus = ({ data, taskId, reload }) => {
     const [anchorEl, setAnchorEl] = useState(null)
@@ -44,37 +36,34 @@ const TaskStatus = ({ data, taskId, reload }) => {
 
     const [markComplete, setMarkComplete] = useState(false)
 
-
     const handleMarkComplete = (event) => {
         setMarkComplete(!markComplete)
-
     }
     const handleClose = () => {
         setMarkComplete(false)
-
     }
 
-    const handelUpdateStatus = async () => {
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget)
+    }
+    const handleCloseList = () => {
+        setAnchorEl(null)
+    }
+
+    const handelUpdateStatus = async (status) => {
         try {
-            const { data } = await updateTaskStatus(taskId, "COMPLETE")
+            const { data } = await updateTaskStatus(taskId, status)
             if (data.success) {
                 reload()
                 setMarkComplete(false)
-
-
             }
         } catch (error) {
-            console.log("Error", error)
+            console.log('Error', error)
         }
-
     }
-
-
 
     return (
         <>
-
-
             <Dialog
                 open={markComplete}
                 onClose={handleClose}
@@ -86,72 +75,104 @@ const TaskStatus = ({ data, taskId, reload }) => {
                 </DialogTitle>
 
                 <DialogActions>
-                    <Button variant="contained" onClick={handleClose}>Disagree</Button>
-                    <Button variant="contained" onClick={handelUpdateStatus} autoFocus>
+                    <Button variant="contained" onClick={handleClose}>
+                        Disagree
+                    </Button>
+                    <Button
+                        variant="contained"
+                        onClick={() => handelUpdateStatus('COMPLETE')}
+                        autoFocus
+                    >
                         Agree
                     </Button>
                 </DialogActions>
             </Dialog>
 
-
-
             <Card sx={{ margin: 1 }}>
-                {/* <CardHeader
-            // avatar={<Checkbox defaultunChecked />}
-
-
-            // action={
-            //     <Stack>
-            //         <IconButton
-            //             aria-label="settings"
-            //             aria-controls={
-            //                 open ? 'demo-positioned-menu' : undefined
-            //             }
-            //             aria-haspopup="true"
-            //             aria-expanded={open ? 'true' : undefined}
-            //             onClick={handleClick}
-            //         >
-            //             <MoreVert />
-            //         </IconButton>
-            //         <Menu
-            //             id="demo-positioned-menu"
-            //             aria-labelledby="demo-positioned-button"
-            //             anchorEl={anchorEl}
-            //             open={open}
-            //             onClose={handleClose}
-            //             anchorOrigin={{
-            //                 vertical: 'top',
-            //                 horizontal: 'left',
-            //             }}
-            //             transformOrigin={{
-            //                 vertical: 'top',
-            //                 horizontal: 'left',
-            //             }}
-            //         >
-            //             <MenuItem onClick={handleClose}>On Hold</MenuItem>
-            //             <MenuItem onClick={handleClose}>
-            //                 In Progress
-            //             </MenuItem>
-            //             <MenuItem onClick={handleClose}>Assign to</MenuItem>
-            //             <MenuItem onClick={handleClose}>Edit</MenuItem>
-            //             <MenuItem onClick={handleClose}>Delete</MenuItem>
-            //         </Menu>
-            //     </Stack>
-            // }
-            // title="Mark as completed"
-            >
-
-
-            </CardHeader> */}
-
                 <CardContent>
-                    <FormGroup>
-                        <FormControlLabel control={<Checkbox checked={data && data.status === "COMPLETE" ? true : markComplete}
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            width: '100%',
+                            justifyContent: 'space-between',
+                        }}
+                    >
+                        <FormGroup>
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        checked={
+                                            data && data.status === 'COMPLETE'
+                                                ? true
+                                                : markComplete
+                                        }
+                                        disabled={
+                                            data && data.status === 'COMPLETE'
+                                                ? true
+                                                : false
+                                        }
+                                    />
+                                }
+                                label="Mark as completed"
+                                onChange={handleMarkComplete}
+                            />
+                        </FormGroup>
+                        <Stack>
+                            <IconButton
+                                aria-label="settings"
+                                aria-controls={
+                                    open ? 'demo-positioned-menu' : undefined
+                                }
+                                aria-haspopup="true"
+                                aria-expanded={open ? 'true' : undefined}
+                                onClick={handleClick}
+                            >
+                                <MoreVert />
+                            </IconButton>
+                            <Menu
+                                id="demo-positioned-menu"
+                                aria-labelledby="demo-positioned-button"
+                                anchorEl={anchorEl}
+                                open={open}
+                                onClose={handleCloseList}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'left',
+                                }}
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'left',
+                                }}
+                            >
+                                <MenuItem
+                                    onClick={() => {
+                                        handelUpdateStatus('HOLD')
+                                        handleCloseList()
+                                    }}
+                                >
+                                    On Hold
+                                </MenuItem>
+                                <MenuItem
+                                    onClick={() => {
+                                        handelUpdateStatus('PROGRESS')
+                                        handleCloseList()
+                                    }}
+                                >
+                                    In Progress
+                                </MenuItem>
+                                <MenuItem onClick={handleCloseList}>
+                                    Assign to
+                                </MenuItem>
+                                <MenuItem onClick={handleCloseList}>
+                                    Edit
+                                </MenuItem>
+                                <MenuItem onClick={handleCloseList}>
+                                    Delete
+                                </MenuItem>
+                            </Menu>
+                        </Stack>
+                    </Box>
 
-                            disabled={data && data.status === "COMPLETE" ? true : false}
-
-                        />} label="Mark as completed" onChange={handleMarkComplete} />
-                    </FormGroup>
                     <Stack direction={'column'} spacing={2}>
                         <Stack xs={2}>
                             <Typography variant="h5" component="h2">
@@ -300,7 +321,7 @@ const TaskStatus = ({ data, taskId, reload }) => {
                                                 variant="body1"
                                                 color="gray"
                                             >
-                                                In progress
+                                                {data && data.status}
                                             </Typography>
                                         </Stack>
                                     </Stack>
@@ -314,10 +335,10 @@ const TaskStatus = ({ data, taskId, reload }) => {
                                 Overview:
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
-                                This impressive paella is a perfect party dish and a
-                                fun meal to cook together with your guests. Add 1
-                                cup of frozen peas along with the mussels, if you
-                                like.
+                                This impressive paella is a perfect party dish
+                                and a fun meal to cook together with your
+                                guests. Add 1 cup of frozen peas along with the
+                                mussels, if you like.
                             </Typography>
                         </Stack>
 
@@ -334,7 +355,9 @@ const TaskStatus = ({ data, taskId, reload }) => {
                                 spacing={1}
                                 color={'primary'}
                             />
-                            <Typography variant="subtitle1">Services</Typography>
+                            <Typography variant="subtitle1">
+                                Services
+                            </Typography>
                             {!isEmpty(data) &&
                                 data.service.map((item, index) => {
                                     return (
@@ -358,7 +381,12 @@ const TaskStatus = ({ data, taskId, reload }) => {
                                 spacing={1}
                                 color={'primary'}
                             />
-                            <Typography variant="subtitle1" sx={{ paddingRight: "20px" }}>Parts</Typography>
+                            <Typography
+                                variant="subtitle1"
+                                sx={{ paddingRight: '20px' }}
+                            >
+                                Parts
+                            </Typography>
 
                             {!isEmpty(data) &&
                                 data.extraPart.map((item, index) => {

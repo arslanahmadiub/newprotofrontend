@@ -16,11 +16,12 @@ const getTaskById = async (id) => {
     return await axios.get(`${baseurl}/task/get/${id}`)
 }
 
-
 const updateTaskStatus = async (id, status) => {
     return await axios.put(`${baseurl}/task/update/${id}`, { status })
 }
 
+const updateTaskImages = async (id, requestData) => {
+    return await axios.post(`${baseurl}/task/image/${id}`, requestData)
+}
 
-
-export { addTask, getTask, getTaskById, updateTaskStatus }
+export { addTask, getTask, getTaskById, updateTaskStatus, updateTaskImages }
