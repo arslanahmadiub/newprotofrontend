@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
 import AddIcon from '@mui/icons-material/Add'
-
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator'
 import TaskServices from './TaskServices'
 import { getServiceForSelector } from 'api-services/ServicesApi'
@@ -27,6 +26,7 @@ const AddNewTaskForm = ({ data, reset }) => {
     const { customerId, customerPhone, selectedCar } = data
     const [servicesData, setServicesData] = useState([])
     const [partsData, setPartsData] = useState([])
+    const [overView, setOverView] = useState('')
 
     const [totalCostObject, setTotalCostObject] = useState({
         totalPrice: '',
@@ -92,11 +92,10 @@ const AddNewTaskForm = ({ data, reset }) => {
                 extraPartsCost === '' ? 0 : parseFloat(extraPartsCost)
             const taxValue = parseFloat(value)
 
-
             const finalPriceValue = totalPriceValue + extraPartsValue
 
-            const finalPriceValueWitTax = finalPriceValue + (finalPriceValue * taxValue / 100)
-
+            const finalPriceValueWitTax =
+                finalPriceValue + (finalPriceValue * taxValue) / 100
 
             setTotalCostObject({
                 ...totalCostObject,
@@ -125,11 +124,10 @@ const AddNewTaskForm = ({ data, reset }) => {
 
         const taxValue = tax === '' ? 0 : parseFloat(tax)
 
-        const finalPriceValue = totalPriceValue + extraPartsValue;
+        const finalPriceValue = totalPriceValue + extraPartsValue
 
-
-        const finalPriceValueWithTax = finalPriceValue + (finalPriceValue * taxValue / 100)
-
+        const finalPriceValueWithTax =
+            finalPriceValue + (finalPriceValue * taxValue) / 100
 
         setTotalCostObject({
             ...totalCostObject,
@@ -204,6 +202,7 @@ const AddNewTaskForm = ({ data, reset }) => {
             totalCostObject,
             extraParts,
             taskServiceData,
+            overView,
         }
 
         try {
@@ -256,6 +255,23 @@ const AddNewTaskForm = ({ data, reset }) => {
                             errorMessages={['this field is required']}
                         />
                     </Grid>
+
+                    <Grid item xs={12}>
+                        <TextField
+                            label="Overview"
+                            type="text"
+                            multiline
+                            rows={4}
+                            value={overView}
+                            onChange={(e) => {
+                                setOverView(e.target.value)
+                            }}
+                            placeholder="Overview"
+                            validators={['required']}
+                            errorMessages={['this field is required']}
+                        />
+                    </Grid>
+
                     <Grid item xs={12} sm={12} md={4} lg={4}>
                         <TextField
                             label="Make"
@@ -431,7 +447,6 @@ const AddNewTaskForm = ({ data, reset }) => {
                             name="tax"
                             value={tax}
                             onChange={handelFinalCostChange}
-
                         />
                     </Grid>
                     <Grid

@@ -176,7 +176,7 @@ const TaskStatus = ({ data, taskId, reload }) => {
                     <Stack direction={'column'} spacing={2}>
                         <Stack xs={2}>
                             <Typography variant="h5" component="h2">
-                                Order # 78900
+                                Order # {data && data.orderId}
                             </Typography>
                         </Stack>
 
@@ -335,10 +335,7 @@ const TaskStatus = ({ data, taskId, reload }) => {
                                 Overview:
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
-                                This impressive paella is a perfect party dish
-                                and a fun meal to cook together with your
-                                guests. Add 1 cup of frozen peas along with the
-                                mussels, if you like.
+                                {data && data.overView}
                             </Typography>
                         </Stack>
 

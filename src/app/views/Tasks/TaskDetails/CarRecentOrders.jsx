@@ -16,6 +16,8 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye'
 import CreateIcon from '@mui/icons-material/Create'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { isEmpty } from 'lodash'
+import moment from 'moment'
+import Chip from '@mui/material/Chip'
 
 const CardHeader = styled('div')(() => ({
     paddingLeft: '24px',
@@ -61,7 +63,13 @@ const EyeButton = styled(IconButton)(() => ({
 }))
 
 const CarRecentOrders = ({ data }) => {
-    if (isEmpty(data)) {
+    const colorObject = {
+        PROGRESS: { background: 'gold', color: 'black' },
+        HOLD: { background: 'red', color: 'white' },
+        COMPLETE: { background: 'green', color: 'white' },
+    }
+
+    if (!data || isEmpty(data.orders)) {
         return (
             <Card elevation={3} sx={{ pt: '20px', mb: 3 }}>
                 <CardHeader>
@@ -116,13 +124,13 @@ const CarRecentOrders = ({ data }) => {
                             <TableCell sx={{ px: 0 }} colSpan={2}>
                                 Date
                             </TableCell>
-                            <TableCell sx={{ px: 0 }} colSpan={2}>
+                            {/* <TableCell sx={{ px: 0 }} colSpan={2}>
                                 Action
-                            </TableCell>
+                            </TableCell> */}
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {productList.map((product, index) => (
+                        {data.orders.map((product, index) => (
                             <TableRow key={index} hover>
                                 {/* #ID */}
                                 <TableCell
@@ -130,7 +138,7 @@ const CarRecentOrders = ({ data }) => {
                                     align="left"
                                     sx={{ px: 0, textTransform: 'capitalize' }}
                                 >
-                                    {product.id}
+                                    #{product.orderId}
                                 </TableCell>
 
                                 {/* Service  */}
@@ -139,7 +147,11 @@ const CarRecentOrders = ({ data }) => {
                                     colSpan={2}
                                     sx={{ px: 0, textTransform: 'capitalize' }}
                                 >
-                                    {product.service}
+                                    {product.service
+                                        .map((scr) => {
+                                            return scr.serviceName
+                                        })
+                                        .join(' , ')}
                                 </TableCell>
 
                                 {/* Milage  */}
@@ -148,7 +160,7 @@ const CarRecentOrders = ({ data }) => {
                                     align="left"
                                     colSpan={2}
                                 >
-                                    {product.milage}
+                                    {product.millage}
                                 </TableCell>
 
                                 {/* assigned to */}
@@ -158,7 +170,7 @@ const CarRecentOrders = ({ data }) => {
                                     sx={{ px: 0, textTransform: 'capitalize' }}
                                 >
                                     <Box display="flex" alignItems="center">
-                                        <Avatar src={product.assignTo} />
+                                        <Avatar src="/assets/images/products/headphone-2.jpg" />
                                     </Box>
                                 </TableCell>
 
@@ -168,7 +180,16 @@ const CarRecentOrders = ({ data }) => {
                                     align="left"
                                     sx={{ px: 0, textTransform: 'capitalize' }}
                                 >
-                                    {product.status}
+                                    <Chip
+                                        label={product.status}
+                                        sx={{
+                                            background:
+                                                colorObject[product.status]
+                                                    .background,
+                                            color: colorObject[product.status]
+                                                .color,
+                                        }}
+                                    />
                                 </TableCell>
 
                                 {/* Date */}
@@ -177,11 +198,13 @@ const CarRecentOrders = ({ data }) => {
                                     align="left"
                                     sx={{ px: 0, textTransform: 'capitalize' }}
                                 >
-                                    {product.date}
+                                    {moment(product.createdAt).format(
+                                        'DD-MM-YYYY'
+                                    )}
                                 </TableCell>
 
                                 {/* Action  */}
-                                <TableCell sx={{ px: 0 }} colSpan={2}>
+                                {/* <TableCell sx={{ px: 0 }} colSpan={2}>
                                     <EyeButton>
                                         <RemoveRedEyeIcon />
                                     </EyeButton>
@@ -191,7 +214,7 @@ const CarRecentOrders = ({ data }) => {
                                     <DeleteButton>
                                         <DeleteIcon />
                                     </DeleteButton>
-                                </TableCell>
+                                </TableCell> */}
                             </TableRow>
                         ))}
                     </TableBody>
