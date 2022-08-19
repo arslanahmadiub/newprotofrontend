@@ -24,4 +24,15 @@ const updateTaskImages = async (id, requestData) => {
     return await axios.post(`${baseurl}/task/image/${id}`, requestData)
 }
 
-export { addTask, getTask, getTaskById, updateTaskStatus, updateTaskImages }
+const deleteTask = async (id) => {
+    return await axios.delete(`${baseurl}/task/delete/${id}`)
+}
+
+export {
+    addTask,
+    getTask,
+    getTaskById,
+    updateTaskStatus,
+    updateTaskImages,
+    deleteTask,
+}

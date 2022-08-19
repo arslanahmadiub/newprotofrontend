@@ -7,7 +7,6 @@ import {
     MenuItem,
     Card,
     CardContent,
-    CardHeader,
     Checkbox,
     IconButton,
     Typography,
@@ -27,13 +26,14 @@ import moment from 'moment'
 
 import FormGroup from '@mui/material/FormGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
-import { updateTaskStatus } from 'api-services/TaskApi'
+import { deleteTask, updateTaskStatus } from 'api-services/TaskApi'
 import { Box } from '@mui/system'
+import { useNavigate } from 'react-router-dom'
 
 const TaskStatus = ({ data, taskId, reload }) => {
     const [anchorEl, setAnchorEl] = useState(null)
     const open = Boolean(anchorEl)
-
+    const navigate = useNavigate()
     const [markComplete, setMarkComplete] = useState(false)
 
     const handleMarkComplete = (event) => {
@@ -59,6 +59,17 @@ const TaskStatus = ({ data, taskId, reload }) => {
             }
         } catch (error) {
             console.log('Error', error)
+        }
+    }
+
+    const handelDeleteTask = async () => {
+        try {
+            const { data } = await deleteTask(taskId)
+            if (data.success) {
+                navigate('/task/view')
+            }
+        } catch (error) {
+            console.log('Error')
         }
     }
 
@@ -166,7 +177,7 @@ const TaskStatus = ({ data, taskId, reload }) => {
                                 <MenuItem onClick={handleCloseList}>
                                     Edit
                                 </MenuItem>
-                                <MenuItem onClick={handleCloseList}>
+                                <MenuItem onClick={handelDeleteTask}>
                                     Delete
                                 </MenuItem>
                             </Menu>

@@ -31,8 +31,6 @@ const Attachments = ({ taskId, reload, data }) => {
         }
     }
 
-    console.log('Data', data)
-
     const handelDownload = (imageUrl) => {
         const link = document.createElement('a')
         link.href = imageUrl
@@ -90,20 +88,18 @@ const Attachments = ({ taskId, reload, data }) => {
                             return (
                                 <Stack
                                     direction="row"
-                                    spacing={12}
                                     sx={{
                                         border: '1px solid lightgrey',
                                         justifyContent: 'space-between',
                                         alignItems: 'center',
                                         padding: '10px',
                                         borderRadius: '5px',
-                                        width: 'fullwidth',
+                                        width: '100%',
                                         marginBottom: '15px',
                                     }}
                                 >
                                     <Stack
                                         direction="row"
-                                        justifyContent="space-between"
                                         alignItems="flex-start"
                                     >
                                         <Typography
@@ -120,7 +116,10 @@ const Attachments = ({ taskId, reload, data }) => {
                                         </Typography>
                                         <Stack direction="column">
                                             <Typography variant="body1">
-                                                {item.name}
+                                                {item.name.substring(0, 9)}...
+                                                {item.name.substring(
+                                                    item.name.length - 4
+                                                )}
                                             </Typography>
                                             <Typography variant="body2">
                                                 {parseFloat(
