@@ -15,7 +15,6 @@ const getUserRoleAuthStatus = (pathname, user, routes) => {
         matched && matched.auth && matched.auth.length
             ? matched.auth.includes(user.role)
             : true
-    console.log(matched, user)
     return authenticated
 }
 
@@ -50,10 +49,7 @@ const AuthGuard = ({ children }) => {
     if (authenticated) return <>{children}</>
     else {
         return (
-            <Navigate
-                to="/"
-                state={{ redirectUrl: previouseRoute }}
-            />
+            <Navigate to="/" state={{ redirectUrl: previouseRoute }} />
             // <Redirect
             //     to={{
             //         pathname: '/',

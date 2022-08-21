@@ -5,7 +5,6 @@ import { baseurlDev, baseurlProd } from '../config/config.json'
 let baseurl = process.env.NODE_ENV === 'development' ? baseurlDev : baseurlProd
 
 const addPartsApi = async (requestData) => {
-    console.log(process.env)
     return await axios.post(`${baseurl}/parts/add`, requestData)
 }
 

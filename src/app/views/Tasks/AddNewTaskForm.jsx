@@ -267,8 +267,6 @@ const AddNewTaskForm = ({ data, reset }) => {
                                 setOverView(e.target.value)
                             }}
                             placeholder="Overview"
-                            validators={['required']}
-                            errorMessages={['this field is required']}
                         />
                     </Grid>
 

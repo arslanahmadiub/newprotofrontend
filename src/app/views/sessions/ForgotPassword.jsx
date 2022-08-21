@@ -46,9 +46,7 @@ const ForgotPassword = () => {
         })
     }
 
-    const handleFormSubmit = (event) => {
-        console.log(state)
-    }
+    const handleFormSubmit = (event) => {}
 
     let { email } = state
 
@@ -93,7 +91,7 @@ const ForgotPassword = () => {
                                     <Span sx={{ mr: 1, ml: '16px' }}>or</Span>
                                     <Button
                                         sx={{ textTransform: 'capitalize' }}
-                                        onClick={() => navigate("/")}
+                                        onClick={() => navigate('/')}
                                     >
                                         Sign in
                                     </Button>

@@ -8,12 +8,13 @@ import CarRecentOrders from './CarRecentOrders'
 import CommentsSection from './CommentsSection'
 import { getTaskById } from 'api-services/TaskApi'
 import { useParams } from 'react-router-dom'
+import EditTaskModel from './EditTaskModel'
 
 const Main = () => {
     const params = useParams()
     const [loading, setLoading] = useState(false)
     const [taskData, setTaskData] = useState({})
-
+    const [openEditModel, setOpenEditModel] = useState(false)
     const getTask = async () => {
         setLoading(true)
         try {
@@ -32,6 +33,11 @@ const Main = () => {
         getTask()
     }, [])
 
+    const handelTaskDataChange = (e) => {
+        const { name, value } = e.target
+        setTaskData({ ...taskData, [name]: value })
+    }
+
     return (
         <div>
             <Grid container spacing={1}>
@@ -48,6 +54,9 @@ const Main = () => {
                         data={taskData}
                         taskId={params.id}
                         reload={() => getTask()}
+                        handelEditModelOpen={() => {
+                            setOpenEditModel(true)
+                        }}
                     />
                     <CarModelDetails data={taskData} />
                 </Grid>
@@ -71,6 +80,16 @@ const Main = () => {
                     />
                 </Grid>
             </Grid>
+            <EditTaskModel
+                open={openEditModel}
+                enginNumber={taskData && taskData.enginNumber}
+                millage={taskData && taskData.millage}
+                handleClose={() => setOpenEditModel(false)}
+                selectedCar={taskData && taskData.taskCar}
+                taskId={params.id}
+                reload={() => getTask()}
+                handelChange={handelTaskDataChange}
+            />
         </div>
     )
 }

@@ -16,6 +16,7 @@ const TaskServices = ({
     partsData,
     number,
     handelAutoCompletServiceChange,
+    fieldRequired = true,
 }) => {
     const {
         serviceValue,
@@ -75,7 +76,7 @@ const TaskServices = ({
                     InputProps={{
                         readOnly: true,
                     }}
-                    validators={['required']}
+                    validators={fieldRequired && ['required']}
                     errorMessages={['this field is required']}
                 />
             </Grid>
@@ -89,7 +90,7 @@ const TaskServices = ({
                     InputProps={{
                         readOnly: true,
                     }}
-                    validators={['required']}
+                    validators={fieldRequired && ['required']}
                     errorMessages={['this field is required']}
                 />
             </Grid>
@@ -103,7 +104,7 @@ const TaskServices = ({
                     InputProps={{
                         readOnly: true,
                     }}
-                    validators={['required']}
+                    validators={fieldRequired && ['required']}
                     errorMessages={['this field is required']}
                 />
             </Grid>
@@ -117,7 +118,7 @@ const TaskServices = ({
                     InputProps={{
                         readOnly: true,
                     }}
-                    validators={['required']}
+                    validators={fieldRequired && ['required']}
                     errorMessages={['this field is required']}
                 />
             </Grid>

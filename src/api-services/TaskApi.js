@@ -27,7 +27,9 @@ const updateTaskImages = async (id, requestData) => {
 const deleteTask = async (id) => {
     return await axios.delete(`${baseurl}/task/delete/${id}`)
 }
-
+const updateTask = async (id, data) => {
+    return await axios.put(`${baseurl}/task/update_task/${id}`, data)
+}
 export {
     addTask,
     getTask,
@@ -35,4 +37,5 @@ export {
     updateTaskStatus,
     updateTaskImages,
     deleteTask,
+    updateTask,
 }

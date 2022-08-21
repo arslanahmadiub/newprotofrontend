@@ -30,7 +30,7 @@ import { deleteTask, updateTaskStatus } from 'api-services/TaskApi'
 import { Box } from '@mui/system'
 import { useNavigate } from 'react-router-dom'
 
-const TaskStatus = ({ data, taskId, reload }) => {
+const TaskStatus = ({ data, taskId, reload, handelEditModelOpen }) => {
     const [anchorEl, setAnchorEl] = useState(null)
     const open = Boolean(anchorEl)
     const navigate = useNavigate()
@@ -174,7 +174,7 @@ const TaskStatus = ({ data, taskId, reload }) => {
                                 <MenuItem onClick={handleCloseList}>
                                     Assign to
                                 </MenuItem>
-                                <MenuItem onClick={handleCloseList}>
+                                <MenuItem onClick={handelEditModelOpen}>
                                     Edit
                                 </MenuItem>
                                 <MenuItem onClick={handelDeleteTask}>
@@ -354,10 +354,11 @@ const TaskStatus = ({ data, taskId, reload }) => {
                         <Stack
                             direction={'row'}
                             spacing={2}
-                            lg={12}
-                            md={12}
-                            sm={12}
                             xs={12}
+                            sx={{
+                                display: 'flex',
+                                flexWrap: 'wrap',
+                            }}
                         >
                             <SettingsSuggestOutlinedIcon
                                 spacing={1}
@@ -369,22 +370,19 @@ const TaskStatus = ({ data, taskId, reload }) => {
                             {!isEmpty(data) &&
                                 data.service.map((item, index) => {
                                     return (
-                                        <Chip
-                                            label={item.serviceName}
-                                            color="primary"
+                                        <Box
+                                            sx={{ padding: '1px' }}
                                             key={index}
-                                        />
+                                        >
+                                            <Chip
+                                                label={item.serviceName}
+                                                color="primary"
+                                            />
+                                        </Box>
                                     )
                                 })}
                         </Stack>
-                        <Stack
-                            direction={'row'}
-                            spacing={2}
-                            lg={12}
-                            md={12}
-                            sm={12}
-                            xs={12}
-                        >
+                        <Stack direction={'row'} spacing={2} xs={12}>
                             <MiscellaneousServicesOutlinedIcon
                                 spacing={1}
                                 color={'primary'}
@@ -399,11 +397,15 @@ const TaskStatus = ({ data, taskId, reload }) => {
                             {!isEmpty(data) &&
                                 data.extraPart.map((item, index) => {
                                     return (
-                                        <Chip
-                                            label={item.partBrand}
-                                            color="primary"
+                                        <Box
+                                            sx={{ padding: '1px' }}
                                             key={index}
-                                        />
+                                        >
+                                            <Chip
+                                                label={item.partBrand}
+                                                color="primary"
+                                            />
+                                        </Box>
                                     )
                                 })}
                         </Stack>
