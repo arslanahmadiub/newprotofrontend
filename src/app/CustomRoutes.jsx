@@ -4,9 +4,8 @@ import ServicesDetails from './views/Services/ServicesDetails'
 import ViewTask from './views/Tasks/ViewTask'
 import AddTask from './views/Tasks/AddTask'
 import TaskDetails from './views/Tasks/TaskDetails'
-
-
-
+import AddCustomer from './views/Customers/AddCustomer'
+import ViewCustomer from './views/Customers/ViewCustomer'
 
 const AddParts = Loadable(lazy(() => import('./views/Parts/AddParts')))
 const ViewParts = Loadable(lazy(() => import('./views/Parts/ViewParts')))
@@ -47,7 +46,15 @@ const customRoutes = [
     },
     {
         path: '/task/details/:id',
-        element: <TaskDetails/>,
+        element: <TaskDetails />,
+    },
+    {
+        path: '/customer/add',
+        element: <AddCustomer />,
+    },
+    {
+        path: '/customer/view',
+        element: <ViewCustomer />,
     },
 ]
 

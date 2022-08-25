@@ -42,9 +42,22 @@ export const navigations = [
 
     {
         name: 'Customers',
-        path: '/customers',
         icon: 'transfer_within_a_station',
+        children: [
+            {
+                name: 'Add Customer',
+                path: '/customer/add',
+                iconText: 'A',
+            },
+
+            {
+                name: 'View Customer',
+                path: '/customer/view',
+                iconText: 'E',
+            },
+        ],
     },
+
     {
         name: 'Tasks',
         icon: 'tasks',
