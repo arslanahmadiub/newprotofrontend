@@ -16,6 +16,15 @@ const ViewServices = Loadable(
     lazy(() => import('./views/Services/ViewServices'))
 )
 
+const ViewMechanic = Loadable(
+    lazy(() => import('./views/Mechanic/ViewMechanic'))
+)
+const ViewMechanicDetails = Loadable(
+    lazy(() => import('./views/Mechanic/ViewMechanicDetails'))
+)
+
+const AddMechanic = Loadable(lazy(() => import('./views/Mechanic/AddMechanic')))
+
 const customRoutes = [
     {
         path: '/parts/add',
@@ -59,7 +68,19 @@ const customRoutes = [
     },
     {
         path: '/invoices',
-        element: <ViewInvoice/>,
+        element: <ViewInvoice />,
+    },
+    {
+        path: '/mechanic/view',
+        element: <ViewMechanic />,
+    },
+    {
+        path: '/mechanic/view/details/:id',
+        element: <ViewMechanicDetails />,
+    },
+    {
+        path: '/mechanic/add',
+        element: <AddMechanic />,
     },
 ]
 

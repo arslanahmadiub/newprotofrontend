@@ -75,11 +75,25 @@ export const navigations = [
             },
         ],
     },
+
     {
         name: 'Mechanics',
-        path: '/mechanics',
         icon: 'subtitles',
+        children: [
+            {
+                name: 'Add Mechanic',
+                path: '/mechanic/add',
+                iconText: 'A',
+            },
+
+            {
+                name: 'View Mechanic',
+                path: '/mechanic/view',
+                iconText: 'V',
+            },
+        ],
     },
+
     {
         name: 'Enquiries',
         path: '/enquieries',
